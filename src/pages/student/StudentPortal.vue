@@ -18,10 +18,30 @@
     <section class="mx-auto grid max-w-7xl items-start gap-6 px-6 py-10 lg:grid-cols-[280px_1fr] lg:px-8">
       <aside class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <div class="rounded-lg bg-navy-900 p-5 text-white">
-          <p class="text-sm text-slate-300">Career profile</p>
-          <p class="mt-2 text-3xl font-black">78%</p>
-          <div class="mt-4 h-2 rounded-full bg-white/15">
-            <div class="h-2 rounded-full bg-emerald-400" style="width: 78%"></div>
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white text-sm font-black text-navy-900">AO</div>
+            <div class="min-w-0">
+              <p class="truncate font-black">Amara Okonkwo</p>
+              <p class="mt-1 truncate text-xs font-semibold text-slate-300">RUN/2021/CSC/014</p>
+              <p class="truncate text-xs text-slate-400">amara@run.edu.ng</p>
+            </div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-4">
+            <div v-for="stat in networkStats" :key="stat.label">
+              <p class="text-lg font-black">{{ stat.value }}</p>
+              <p class="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-slate-300">{{ stat.label }}</p>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <div class="flex items-center justify-between text-xs font-semibold text-slate-300">
+              <span>Career profile</span>
+              <span>78%</span>
+            </div>
+            <div class="mt-2 h-2 rounded-full bg-white/15">
+              <div class="h-2 rounded-full bg-emerald-400" style="width: 78%"></div>
+            </div>
           </div>
         </div>
 
@@ -44,7 +64,7 @@
       </aside>
 
       <div class="grid content-start gap-6">
-        <div v-if="activePage === 'feed'" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <div v-if="false" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
           <div class="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
             <div class="flex items-center gap-4">
               <div class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-navy-900 text-xl font-black text-white">AO</div>
@@ -63,7 +83,7 @@
           </div>
         </div>
 
-        <div v-else>
+        <div v-if="activePage !== 'feed'">
           <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">{{ currentMenu.label }}</p>
           <h2 class="mt-2 text-3xl font-black text-navy-900">{{ pageTitle }}</h2>
         </div>
