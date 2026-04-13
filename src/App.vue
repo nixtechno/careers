@@ -4,8 +4,9 @@ import SampleOne from './pages/SampleOne.vue'
 import SampleTwo from './pages/SampleTwo.vue'
 import AdminPortal from './pages/admin/AdminPortal.vue'
 import StudentPortal from './pages/student/StudentPortal.vue'
+import { currentRoutePath } from './utils/navigation'
 
-const path = ref(window.location.pathname)
+const path = ref(currentRoutePath())
 
 const routes = {
   '/': SampleOne,
@@ -17,7 +18,7 @@ const routes = {
 const currentPage = computed(() => routes[path.value] ?? SampleOne)
 
 const handleNavigation = () => {
-  path.value = window.location.pathname
+  path.value = currentRoutePath()
 }
 
 onMounted(() => {

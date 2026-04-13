@@ -142,6 +142,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import ThemeToggle from '../ThemeToggle.vue'
+import { navigateTo } from '../../utils/navigation'
 
 const mobileMenuOpen = ref(false)
 const loginModalOpen = ref(false)
@@ -186,7 +187,6 @@ const openLoginModal = () => {
 const goToPortal = () => {
   const target = activeLoginTab.value === 'admin' ? '/admin' : '/student'
   loginModalOpen.value = false
-  window.history.pushState({}, '', target)
-  window.dispatchEvent(new PopStateEvent('popstate'))
+  navigateTo(target)
 }
 </script>

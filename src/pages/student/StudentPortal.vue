@@ -8,7 +8,7 @@
         </div>
         <div class="flex items-center gap-3">
           <ThemeToggle />
-          <a class="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" href="/">
+          <a class="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" :href="withBase('/')">
             Back to site
           </a>
         </div>
@@ -137,6 +137,7 @@ import { computed, ref } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PortalIcon from '../../components/portal/PortalIcon.vue'
 import ThemeToggle from '../../components/ThemeToggle.vue'
+import { withBase } from '../../utils/navigation'
 
 const activePage = ref('dashboard')
 const menu = [
