@@ -269,48 +269,35 @@
         <section v-else-if="activePage === 'events'" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
           <div class="flex flex-col justify-between gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-center">
             <div>
-              <h3 class="text-xl font-black text-navy-900">March - May 2026</h3>
+              <h3 class="text-xl font-black text-navy-900">{{ activeCalendarMonth.name }} 2026</h3>
               <p class="mt-1 text-sm text-slate-500">Tap a marked date to view event details.</p>
             </div>
-            <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">{{ events.length }} scheduled</span>
+            <div class="flex flex-wrap items-center gap-2">
+              <button class="rounded-md border border-slate-300 px-3 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="previousMonth">Previous</button>
+              <button class="rounded-md border border-slate-300 px-3 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="nextMonth">Next</button>
+              <button class="rounded-md bg-navy-900 px-3 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="eventListOpen = true">View Events</button>
+            </div>
           </div>
 
-          <div class="mt-5 grid gap-6 lg:grid-cols-[1fr_280px]">
+          <div class="mt-5">
             <div class="grid grid-cols-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
-              <div v-for="day in weekDays" :key="day" class="border-b border-slate-200 bg-slate-50 px-2 py-3 text-center text-xs font-bold uppercase tracking-wide text-slate-500">
-                {{ day }}
-              </div>
-              <button
-                v-for="day in calendarDays"
-                :key="day.key"
-                class="min-h-24 border-b border-r border-slate-200 p-2 text-left transition hover:bg-slate-50"
-                :class="day.isMuted ? 'bg-slate-50/70 text-slate-300' : 'bg-white text-slate-700'"
-                type="button"
-                @click="day.event && openEvent(day.event)"
-              >
-                <span class="text-xs font-bold">{{ day.day }}</span>
-                <span v-if="day.event" class="mt-2 block rounded-md bg-navy-900 px-2 py-1 text-xs font-bold leading-5 text-white">
-                  {{ day.event.title }}
-                </span>
-              </button>
+            <div v-for="day in weekDays" :key="day" class="border-b border-slate-200 bg-slate-50 px-2 py-3 text-center text-xs font-bold uppercase tracking-wide text-slate-500">
+              {{ day }}
             </div>
-
-            <aside class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <h4 class="font-black text-navy-900">Event list</h4>
-              <div class="mt-4 grid gap-3">
-                <button
-                  v-for="event in events"
-                  :key="event.title"
-                  class="rounded-md bg-white p-4 text-left transition hover:bg-slate-100"
-                  type="button"
-                  @click="openEvent(event)"
-                >
-                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.date }}</p>
-                  <p class="mt-1 font-black text-navy-900">{{ event.title }}</p>
-                  <p class="mt-1 text-sm text-slate-500">{{ event.time }} • {{ event.venue }}</p>
-                </button>
-              </div>
-            </aside>
+            <button
+              v-for="day in calendarDays"
+              :key="day.key"
+              class="min-h-24 border-b border-r border-slate-200 p-2 text-left transition hover:bg-slate-50"
+              :class="day.isMuted ? 'bg-slate-50/70 text-slate-300' : 'bg-white text-slate-700'"
+              type="button"
+              @click="day.event && openEvent(day.event)"
+            >
+              <span class="text-xs font-bold">{{ day.day }}</span>
+              <span v-if="day.event" class="mt-2 block rounded-md bg-navy-900 px-2 py-1 text-xs font-bold leading-5 text-white">
+                {{ day.event.title }}
+              </span>
+            </button>
+            </div>
           </div>
         </section>
 
@@ -362,6 +349,35 @@
   </main>
 
   <EventDetailsModal :event="selectedEvent" @close="selectedEvent = null" @register="registerForEvent" />
+
+  <div v-if="eventListOpen" class="fixed inset-0 z-[115] flex min-h-screen items-center justify-center bg-navy-900/70 px-4 py-8 backdrop-blur-sm" @click.self="eventListOpen = false">
+    <section class="w-full max-w-lg overflow-hidden rounded-lg bg-white shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="event-list-title">
+      <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Events</p>
+          <h2 id="event-list-title" class="mt-1 text-2xl font-black text-navy-900">Scheduled events</h2>
+        </div>
+        <button class="rounded-full bg-slate-100 p-2 text-slate-500 transition hover:bg-slate-200 hover:text-navy-900" type="button" aria-label="Close events list" @click="eventListOpen = false">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+      <div class="grid gap-3 p-6">
+        <button
+          v-for="event in events"
+          :key="event.title"
+          class="rounded-md border border-slate-200 bg-slate-50 p-4 text-left transition hover:bg-white"
+          type="button"
+          @click="eventListOpen = false; openEvent(event)"
+        >
+          <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.date }}</p>
+          <p class="mt-1 font-black text-navy-900">{{ event.title }}</p>
+          <p class="mt-1 text-sm text-slate-500">{{ event.time }} • {{ event.venue }}</p>
+        </button>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup>
@@ -393,6 +409,8 @@ const feedLoading = ref(true)
 const feedNotice = ref('')
 const feedVisibleCount = ref(4)
 const selectedEvent = ref(null)
+const eventListOpen = ref(false)
+const activeMonthIndex = ref(0)
 const networkStats = [
   { label: 'Connections', value: '248' },
 ]
@@ -520,6 +538,11 @@ const resources = [
   { type: 'Checklist', title: 'Scholarship Application Checklist', copy: 'A step-by-step list for strong scholarship submissions.' },
 ]
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const calendarMonths = [
+  { label: 'Mar', name: 'March', days: 31, offset: 0 },
+  { label: 'Apr', name: 'April', days: 30, offset: 3 },
+  { label: 'May', name: 'May', days: 31, offset: 5 },
+]
 const events = [
   {
     day: 15,
@@ -555,37 +578,27 @@ const events = [
     checklist: ['Write down one business idea', 'Bring a notebook', 'Prepare a question for alumni founders'],
   },
 ]
+const activeCalendarMonth = computed(() => calendarMonths[activeMonthIndex.value])
 const calendarDays = computed(() => {
   const eventByKey = new Map(events.map((event) => [`${event.month}-${event.day}`, event]))
-  const months = [
-    { label: 'Mar', days: 31, offset: 0 },
-    { label: 'Apr', days: 30, offset: 3 },
-    { label: 'May', days: 31, offset: 5 },
-  ]
-
-  return months.flatMap((month) => {
-    const leading = Array.from({ length: month.offset }, (_, index) => ({
-      key: `${month.label}-muted-start-${index}`,
-      day: '',
-      isMuted: true,
-      event: null,
-    }))
-    const days = Array.from({ length: month.days }, (_, index) => {
-      const day = index + 1
-      return {
-        key: `${month.label}-${day}`,
-        day: `${day}`,
-        isMuted: false,
-        event: eventByKey.get(`${month.label}-${day}`) ?? null,
-      }
-    })
-
-    return [
-      { key: `${month.label}-label`, day: month.label, isMuted: true, event: null },
-      ...leading,
-      ...days,
-    ]
+  const month = activeCalendarMonth.value
+  const leading = Array.from({ length: month.offset }, (_, index) => ({
+    key: `${month.label}-muted-start-${index}`,
+    day: '',
+    isMuted: true,
+    event: null,
+  }))
+  const days = Array.from({ length: month.days }, (_, index) => {
+    const day = index + 1
+    return {
+      key: `${month.label}-${day}`,
+      day: `${day}`,
+      isMuted: false,
+      event: eventByKey.get(`${month.label}-${day}`) ?? null,
+    }
   })
+
+  return [...leading, ...days]
 })
 const connections = [
   { initials: 'TA', name: 'Tomi Adewale', role: 'Alumni Mentor • Data Analytics', copy: 'Available for portfolio reviews and internship preparation conversations.' },
@@ -616,6 +629,14 @@ const loadMoreFeed = () => {
 
 const openEvent = (event) => {
   selectedEvent.value = event
+}
+
+const previousMonth = () => {
+  activeMonthIndex.value = activeMonthIndex.value === 0 ? calendarMonths.length - 1 : activeMonthIndex.value - 1
+}
+
+const nextMonth = () => {
+  activeMonthIndex.value = activeMonthIndex.value === calendarMonths.length - 1 ? 0 : activeMonthIndex.value + 1
 }
 
 const registerForEvent = (event) => {
