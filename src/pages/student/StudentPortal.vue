@@ -103,7 +103,6 @@
                 <h3 class="text-xl font-black text-navy-900">Next best actions</h3>
                 <p class="mt-1 text-sm text-slate-500">A quick path through the things that need attention.</p>
               </div>
-              <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="activePage = 'feed'">Open Feed</button>
             </div>
             <div class="mt-5 grid gap-4 md:grid-cols-3">
               <div v-for="step in steps" :key="step" class="rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
@@ -115,7 +114,6 @@
           <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex items-center justify-between">
               <h3 class="text-xl font-black text-navy-900">Latest network updates</h3>
-              <button class="text-sm font-bold text-emerald-700" type="button" @click="activePage = 'feed'">View all</button>
             </div>
             <div class="mt-5 divide-y divide-slate-100">
               <div v-for="item in feedItems.slice(0, 3)" :key="item.title" class="py-4 first:pt-0 last:pb-0">
@@ -307,7 +305,8 @@ import { withBase } from '../../utils/navigation'
 const activePage = ref('dashboard')
 const menu = [
   { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
-  { id: 'feed', label: 'Feed', icon: 'feed' },
+  // Feed is parked for a later networking rollout.
+  // { id: 'feed', label: 'Feed', icon: 'feed' },
   { id: 'connections', label: 'Connections', icon: 'people' },
   { id: 'notifications', label: 'Notifications', icon: 'notifications' },
   { id: 'opportunities', label: 'Opportunities', icon: 'opportunities' },
