@@ -1,6 +1,7 @@
 <template>
   <div v-if="event" class="fixed inset-0 z-[120] flex min-h-screen items-center justify-center bg-navy-900/70 px-4 py-8 backdrop-blur-sm" @click.self="$emit('close')">
     <section class="w-full max-w-xl overflow-hidden rounded-lg bg-white shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="event-modal-title">
+      <img v-if="event.image" class="h-44 w-full object-cover" :src="event.image" :alt="event.imageAlt || event.title" />
       <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5">
         <div>
           <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.type }}</p>

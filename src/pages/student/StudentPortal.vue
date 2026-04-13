@@ -367,13 +367,16 @@
         <button
           v-for="event in events"
           :key="event.title"
-          class="rounded-md border border-slate-200 bg-slate-50 p-4 text-left transition hover:bg-white"
+          class="overflow-hidden rounded-md border border-slate-200 bg-slate-50 text-left transition hover:bg-white"
           type="button"
           @click="eventListOpen = false; openEvent(event)"
         >
-          <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.date }}</p>
-          <p class="mt-1 font-black text-navy-900">{{ event.title }}</p>
-          <p class="mt-1 text-sm text-slate-500">{{ event.time }} • {{ event.venue }}</p>
+          <img class="h-28 w-full object-cover" :src="event.image" :alt="event.imageAlt" />
+          <span class="block p-4">
+            <span class="block text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.date }}</span>
+            <span class="mt-1 block font-black text-navy-900">{{ event.title }}</span>
+            <span class="mt-1 block text-sm text-slate-500">{{ event.time }} • {{ event.venue }}</span>
+          </span>
         </button>
       </div>
     </section>
@@ -553,6 +556,8 @@ const events = [
     time: '10:00 AM',
     venue: 'Main Auditorium',
     copy: 'Meet industry professionals and explore digital career pathways across software, product, and data.',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Students attending a technology conference',
     checklist: ['Bring your student ID', 'Prepare a short introduction', 'Save two questions for the panel'],
   },
   {
@@ -564,6 +569,8 @@ const events = [
     time: '11:30 AM',
     venue: 'University Multipurpose Hall',
     copy: 'Connect with recruiters and prepare for internship, scholarship, and graduate applications.',
+    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Recruiters speaking with students at a career fair',
     checklist: ['Update your CV', 'Dress professionally', 'Review participating employers'],
   },
   {
@@ -575,6 +582,8 @@ const events = [
     time: '1:00 PM',
     venue: 'Enterprise Hub',
     copy: 'Learn how students can shape ideas into ventures with mentorship, funding readiness, and market support.',
+    image: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=1200&q=80',
+    imageAlt: 'Students listening during an entrepreneurship summit',
     checklist: ['Write down one business idea', 'Bring a notebook', 'Prepare a question for alumni founders'],
   },
 ]
