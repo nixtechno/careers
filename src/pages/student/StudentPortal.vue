@@ -88,7 +88,46 @@
           <h2 class="mt-2 text-3xl font-black text-navy-900">{{ pageTitle }}</h2>
         </div>
 
-        <template v-if="activePage === 'feed'">
+        <template v-if="activePage === 'dashboard'">
+          <div class="grid gap-4 md:grid-cols-3">
+            <article v-for="card in overviewCards" :key="card.label" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <p class="text-sm font-semibold text-slate-500">{{ card.label }}</p>
+              <p class="mt-3 text-3xl font-black text-navy-900">{{ card.value }}</p>
+              <p class="mt-2 text-sm text-emerald-700">{{ card.note }}</p>
+            </article>
+          </div>
+
+          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+              <div>
+                <h3 class="text-xl font-black text-navy-900">Next best actions</h3>
+                <p class="mt-1 text-sm text-slate-500">A quick path through the things that need attention.</p>
+              </div>
+              <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="activePage = 'feed'">Open Feed</button>
+            </div>
+            <div class="mt-5 grid gap-4 md:grid-cols-3">
+              <div v-for="step in steps" :key="step" class="rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
+                {{ step }}
+              </div>
+            </div>
+          </section>
+
+          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-black text-navy-900">Latest network updates</h3>
+              <button class="text-sm font-bold text-emerald-700" type="button" @click="activePage = 'feed'">View all</button>
+            </div>
+            <div class="mt-5 divide-y divide-slate-100">
+              <div v-for="item in feedItems.slice(0, 3)" :key="item.title" class="py-4 first:pt-0 last:pb-0">
+                <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ item.type }}</p>
+                <p class="mt-1 font-black text-navy-900">{{ item.title }}</p>
+                <p class="mt-1 text-sm leading-6 text-slate-500">{{ item.copy }}</p>
+              </div>
+            </div>
+          </section>
+        </template>
+
+        <template v-else-if="activePage === 'feed'">
           <InfoBanner v-if="feedNotice" variant="success" title="Feed updated" :message="feedNotice" />
 
           <div v-if="feedLoading" class="grid gap-4">
@@ -265,8 +304,9 @@ import InfoBanner from '../../components/shared/InfoBanner.vue'
 import ThemeToggle from '../../components/ThemeToggle.vue'
 import { withBase } from '../../utils/navigation'
 
-const activePage = ref('feed')
+const activePage = ref('dashboard')
 const menu = [
+  { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
   { id: 'feed', label: 'Feed', icon: 'feed' },
   { id: 'connections', label: 'Connections', icon: 'people' },
   { id: 'notifications', label: 'Notifications', icon: 'notifications' },
@@ -285,6 +325,12 @@ const feedVisibleCount = ref(4)
 const networkStats = [
   { label: 'Connections', value: '248' },
 ]
+const overviewCards = [
+  { label: 'Saved Opportunities', value: '12', note: '3 closing this month' },
+  { label: 'Booked Sessions', value: '2', note: 'Next session: Friday' },
+  { label: 'Unread Notifications', value: '9', note: '2 need action' },
+]
+const steps = ['Update your CV document', 'Register for the next career workshop', 'Save two opportunities before Friday']
 const visibleFeedItems = computed(() => feedItems.slice(0, feedVisibleCount.value))
 const feedItems = [
   {
