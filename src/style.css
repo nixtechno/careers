@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #f7faf8;
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-heading {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-full bg-navy-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-800;
+  }
+
+  .btn-secondary {
+    @apply rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50;
+  }
+
+  .btn-ghost {
+    @apply rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition hover:text-navy-900;
+  }
+
+  .badge {
+    @apply rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700;
+  }
+
+  .badge-outline {
+    @apply rounded-full border border-slate-300 px-2.5 py-0.5 text-xs text-slate-600;
+  }
+
+  .dashboard-widget {
+    @apply rounded-xl border border-slate-100 bg-slate-50 p-3;
+  }
+
+  .search-bar {
+    @apply relative flex items-center;
+  }
+
+  .empty-state {
+    @apply rounded-xl border border-dashed border-slate-200 bg-slate-50 py-12 text-center;
+  }
+}
+
+html.dark {
+  background: #07151f;
+  color-scheme: dark;
+}
+
+html.dark body,
+html.dark #app {
+  background: #07151f;
+  color: #e5edf2;
+}
+
+html.dark .bg-white {
+  background-color: #0b1822 !important;
+}
+
+html.dark .bg-white\/95 {
+  background-color: rgba(11, 24, 34, 0.95) !important;
+}
+
+html.dark .bg-white\/90 {
+  background-color: rgba(11, 24, 34, 0.9) !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-\[\#f7faf8\] {
+  background-color: #0f1f2b !important;
+}
+
+html.dark .bg-slate-100 {
+  background-color: #162b38 !important;
+}
+
+html.dark .bg-navy-900 {
+  background-color: #06111a !important;
+}
+
+html.dark .bg-navy-800 {
+  background-color: #0b1f2e !important;
+}
+
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-100,
+html.dark .bg-navy-50 {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+}
+
+html.dark .text-navy-900,
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700 {
+  color: #e5edf2 !important;
+}
+
+html.dark .text-slate-600,
+html.dark .text-slate-500,
+html.dark .text-slate-400 {
+  color: #9fb0bd !important;
+}
+
+html.dark .text-emerald-700,
+html.dark .text-emerald-600 {
+  color: #6ee7b7 !important;
+}
+
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-300 {
+  border-color: #1f3442 !important;
+}
+
+html.dark .shadow-sm,
+html.dark .shadow-xl,
+html.dark .shadow-2xl {
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35) !important;
+}
+
+html.dark input,
+html.dark select {
+  background-color: #07151f !important;
+  border-color: #274152 !important;
+  color: #e5edf2 !important;
+}
+
+html.dark input::placeholder {
+  color: #7f92a0 !important;
+}
+
+html.dark .hover\:bg-slate-50:hover,
+html.dark .hover\:bg-slate-100:hover,
+html.dark .hover\:bg-slate-200:hover {
+  background-color: #162b38 !important;
+}
+
+html.dark .sample-one-capabilities .about-panel,
+html.dark .bg-gradient-to-br {
+  background: linear-gradient(135deg, #06111a 0%, #0b1f2e 58%, #064e3b 100%) !important;
+}
+
+html.dark .sample-one-opportunities .shimmer {
+  background: linear-gradient(90deg, #102331 0%, #1f3442 48%, #102331 100%);
+  background-size: 220% 100%;
+}
