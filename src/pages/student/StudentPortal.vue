@@ -117,7 +117,7 @@
               <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Live feed</span>
             </div>
 
-            <div class="portal-scroll grid max-h-[680px] grid-cols-1 overflow-y-auto border border-slate-200 bg-white">
+            <div class="portal-scroll grid h-[calc(100vh-220px)] min-h-[420px] w-full grid-cols-1 overflow-y-auto border border-slate-200 bg-white">
               <article v-for="item in visibleFeedItems" :key="item.title" class="border-b border-slate-200 p-5 transition hover:bg-slate-50">
                 <div class="flex items-start gap-4">
                   <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-navy-900">
