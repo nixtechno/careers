@@ -44,28 +44,78 @@
       </aside>
 
       <div class="grid content-start gap-6">
-        <div>
+        <div v-if="activePage === 'dashboard'" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <div>
+              <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Career Network</p>
+              <h2 class="mt-2 text-3xl font-black text-navy-900">Browse your student feed</h2>
+              <p class="mt-3 max-w-2xl leading-7 text-slate-600">Discover opportunities, connect with alumni, join events, and open resources directly from one simple feed.</p>
+            </div>
+            <div class="grid grid-cols-3 gap-3 sm:min-w-[420px]">
+              <div v-for="stat in networkStats" :key="stat.label" class="rounded-md bg-slate-50 p-4 text-center">
+                <p class="text-2xl font-black text-navy-900">{{ stat.value }}</p>
+                <p class="mt-1 text-xs font-bold uppercase tracking-wide text-slate-500">{{ stat.label }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-else>
           <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">{{ currentMenu.label }}</p>
           <h2 class="mt-2 text-3xl font-black text-navy-900">{{ pageTitle }}</h2>
         </div>
 
         <template v-if="activePage === 'dashboard'">
-          <div class="grid gap-4 md:grid-cols-3">
-            <article v-for="card in overviewCards" :key="card.label" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-              <p class="text-sm font-semibold text-slate-500">{{ card.label }}</p>
-              <p class="mt-3 text-3xl font-black text-navy-900">{{ card.value }}</p>
-              <p class="mt-2 text-sm text-emerald-700">{{ card.note }}</p>
+          <p v-if="feedNotice" class="rounded-md bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">{{ feedNotice }}</p>
+
+          <div v-if="feedLoading" class="grid gap-4">
+            <article v-for="index in 4" :key="index" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="portal-shimmer h-12 w-12 rounded-full"></div>
+                <div class="flex-1">
+                  <div class="portal-shimmer h-4 w-40 rounded"></div>
+                  <div class="portal-shimmer mt-3 h-3 w-24 rounded"></div>
+                  <div class="portal-shimmer mt-6 h-4 w-full rounded"></div>
+                  <div class="portal-shimmer mt-3 h-4 w-4/5 rounded"></div>
+                  <div class="mt-5 flex gap-2">
+                    <div class="portal-shimmer h-8 w-24 rounded-md"></div>
+                    <div class="portal-shimmer h-8 w-24 rounded-md"></div>
+                  </div>
+                </div>
+              </div>
             </article>
           </div>
 
-          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 class="text-xl font-black text-navy-900">Recommended next steps</h3>
-            <div class="mt-5 grid gap-4 md:grid-cols-3">
-              <div v-for="step in steps" :key="step" class="rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
-                {{ step }}
+          <div v-else class="grid gap-5">
+            <article v-for="item in feedItems" :key="item.title" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
+              <div class="flex items-start gap-4">
+                <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-navy-900">
+                  <PortalIcon :name="item.icon" />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+                    <div>
+                      <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ item.type }}</p>
+                      <h3 class="mt-1 text-xl font-black text-navy-900">{{ item.title }}</h3>
+                    </div>
+                    <span class="w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">{{ item.time }}</span>
+                  </div>
+                  <p class="mt-3 leading-7 text-slate-600">{{ item.copy }}</p>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    <span v-for="tag in item.tags" :key="tag" class="rounded-full bg-slate-50 px-3 py-1 text-xs font-bold text-slate-600">{{ tag }}</span>
+                  </div>
+                  <div class="mt-5 flex flex-wrap gap-3">
+                    <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="activePage = item.target">
+                      {{ item.primaryAction }}
+                    </button>
+                    <button class="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="runFeedAction(item)">
+                      {{ item.secondaryAction }}
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </section>
+            </article>
+          </div>
         </template>
 
         <section v-else-if="activePage === 'opportunities'" class="grid gap-4 md:grid-cols-2">
@@ -133,7 +183,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PortalIcon from '../../components/portal/PortalIcon.vue'
 import ThemeToggle from '../../components/ThemeToggle.vue'
@@ -151,12 +201,70 @@ const menu = [
 const currentMenu = computed(() => menu.find((item) => item.id === activePage.value) ?? menu[0])
 const pageTitle = computed(() => currentMenu.value.label === 'Dashboard' ? 'Student Overview' : currentMenu.value.label)
 
-const overviewCards = [
-  { label: 'Saved Opportunities', value: '12', note: '3 closing this month' },
-  { label: 'Booked Sessions', value: '2', note: 'Next session: Friday' },
-  { label: 'Resources Opened', value: '18', note: 'CV guide completed' },
+const feedLoading = ref(true)
+const feedNotice = ref('')
+const networkStats = [
+  { label: 'Connections', value: '248' },
+  { label: 'Alumni', value: '64' },
+  { label: 'Groups', value: '12' },
 ]
-const steps = ['Update your CV document', 'Register for the next career workshop', 'Save two opportunities before Friday']
+const feedItems = [
+  {
+    type: 'Alumni connection',
+    title: 'Tomi Adewale is open to mentoring data students',
+    copy: 'Tomi works in analytics at a fintech company and is accepting short portfolio review conversations this week.',
+    time: '12 min ago',
+    tags: ['Data Analytics', 'Mentorship', 'Alumni'],
+    icon: 'people',
+    target: 'profile',
+    primaryAction: 'View Profile',
+    secondaryAction: 'Connect',
+  },
+  {
+    type: 'Opportunity',
+    title: 'Data Science Intern applications are closing soon',
+    copy: 'Access Bank is looking for students with Python, SQL, and analytics interest. CASEC can help review your CV before submission.',
+    time: '1 hr ago',
+    tags: ['Internship', 'Python', 'Lagos'],
+    icon: 'opportunities',
+    target: 'opportunities',
+    primaryAction: 'Open Opportunity',
+    secondaryAction: 'Save',
+  },
+  {
+    type: 'Event',
+    title: 'Career Fair & Workshop registration is live',
+    copy: 'Meet recruiters, practice your introduction, and learn how to present your profile during employer conversations.',
+    time: 'Today',
+    tags: ['Career Fair', 'Recruiters', 'Workshop'],
+    icon: 'events',
+    target: 'events',
+    primaryAction: 'View Event',
+    secondaryAction: 'Remind Me',
+  },
+  {
+    type: 'Resource',
+    title: 'Graduate Interview Guide was added to your library',
+    copy: 'A practical guide for preparing answers, asking better questions, and following up after interviews.',
+    time: 'Yesterday',
+    tags: ['Interview', 'Graduate Role', 'Video'],
+    icon: 'resources',
+    target: 'resources',
+    primaryAction: 'Open Resource',
+    secondaryAction: 'Share',
+  },
+  {
+    type: 'Guidance',
+    title: 'Book a quick CV review before applying',
+    copy: 'The centre has two open guidance slots this week for students applying to internships and scholarships.',
+    time: 'Yesterday',
+    tags: ['CV Review', 'Guidance', 'Application'],
+    icon: 'sessions',
+    target: 'sessions',
+    primaryAction: 'Book Session',
+    secondaryAction: 'See Slots',
+  },
+]
 const opportunities = [
   { type: 'Scholarship', title: 'Aston Ferguson Masters Scholarship', company: 'Aston University', copy: 'Prepare your postgraduate application with centre guidance and scholarship documents.' },
   { type: 'Graduate Role', title: 'Shell Graduate Programme', company: 'Scholarship Region', copy: 'A structured graduate opportunity for students moving into professional work.' },
@@ -182,4 +290,43 @@ const profile = [
   { label: 'Career Interest', value: 'Data Analytics' },
   { label: 'CV Status', value: 'Needs final review' },
 ]
+
+const runFeedAction = (item) => {
+  feedNotice.value = `${item.secondaryAction} added for "${item.title}".`
+}
+
+onMounted(() => {
+  window.setTimeout(() => {
+    feedLoading.value = false
+  }, 750)
+})
 </script>
+
+<style scoped>
+.portal-shimmer {
+  animation: portal-shimmer 1.25s ease-in-out infinite;
+  background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 48%, #f8fafc 100%);
+  background-size: 220% 100%;
+}
+
+:global(html.dark) .portal-shimmer {
+  background: linear-gradient(90deg, #102331 0%, #1f3442 48%, #102331 100%);
+  background-size: 220% 100%;
+}
+
+@keyframes portal-shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-shimmer {
+    animation: none;
+  }
+}
+</style>
