@@ -93,12 +93,11 @@
             <div class="flex items-center justify-between px-1">
               <div>
                 <h3 class="text-lg font-black text-navy-900">Network updates</h3>
-                <p class="text-sm text-slate-500">Showing {{ visibleFeedItems.length }} of {{ feedItems.length }} updates</p>
               </div>
               <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Live feed</span>
             </div>
 
-            <div class="feed-scroll grid max-h-[680px] gap-5 overflow-y-auto pr-2">
+            <div class="feed-scroll grid max-h-[680px] gap-5 overflow-y-auto pr-3">
               <article v-for="item in visibleFeedItems" :key="item.title" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
                 <div class="flex items-start gap-4">
                   <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-navy-900">
@@ -419,6 +418,40 @@ onMounted(() => {
   animation: portal-shimmer 1.25s ease-in-out infinite;
   background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 48%, #f8fafc 100%);
   background-size: 220% 100%;
+}
+
+.feed-scroll {
+  scrollbar-color: #94a3b8 transparent;
+  scrollbar-width: thin;
+}
+
+.feed-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feed-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.feed-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.feed-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+:global(html.dark) .feed-scroll {
+  scrollbar-color: #486273 transparent;
+}
+
+:global(html.dark) .feed-scroll::-webkit-scrollbar-thumb {
+  background: #334957;
+}
+
+:global(html.dark) .feed-scroll::-webkit-scrollbar-thumb:hover {
+  background: #486273;
 }
 
 :global(html.dark) .portal-shimmer {
