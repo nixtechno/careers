@@ -16,7 +16,7 @@
     </section>
 
     <section class="mx-auto grid max-w-7xl items-start gap-6 px-6 py-10 lg:grid-cols-[280px_1fr] lg:px-8">
-      <aside class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+      <aside class="max-h-[calc(100vh-140px)] overflow-hidden rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <div class="rounded-lg bg-navy-900 p-5 text-white">
           <div class="flex items-center gap-3">
             <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white text-sm font-black text-navy-900">AO</div>
@@ -46,7 +46,7 @@
         </div>
 
         <p class="mt-6 text-sm font-bold text-slate-500">Student Menu</p>
-        <nav class="mt-5 grid gap-2">
+        <nav class="portal-scroll mt-5 grid max-h-[360px] gap-2 overflow-y-auto pr-1">
           <button
             v-for="item in menu"
             :key="item.id"
@@ -117,7 +117,7 @@
               <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Live feed</span>
             </div>
 
-            <div class="feed-scroll grid max-h-[680px] grid-cols-1 overflow-y-auto border border-slate-200 bg-white pr-3">
+            <div class="portal-scroll grid max-h-[680px] grid-cols-1 overflow-y-auto border border-slate-200 bg-white">
               <article v-for="item in visibleFeedItems" :key="item.title" class="border-b border-slate-200 p-5 transition hover:bg-slate-50">
                 <div class="flex items-start gap-4">
                   <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-navy-900">
@@ -447,38 +447,22 @@ onMounted(() => {
   background-size: 220% 100%;
 }
 
-.feed-scroll {
-  scrollbar-color: #94a3b8 transparent;
+.portal-scroll {
+  scrollbar-color: transparent transparent;
   scrollbar-width: thin;
 }
 
-.feed-scroll::-webkit-scrollbar {
-  width: 8px;
+.portal-scroll::-webkit-scrollbar {
+  height: 0;
+  width: 0;
 }
 
-.feed-scroll::-webkit-scrollbar-track {
+.portal-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.feed-scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 999px;
-}
-
-.feed-scroll::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-
-:global(html.dark) .feed-scroll {
-  scrollbar-color: #486273 transparent;
-}
-
-:global(html.dark) .feed-scroll::-webkit-scrollbar-thumb {
-  background: #334957;
-}
-
-:global(html.dark) .feed-scroll::-webkit-scrollbar-thumb:hover {
-  background: #486273;
+.portal-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
 :global(html.dark) .portal-shimmer {
