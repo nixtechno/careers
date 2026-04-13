@@ -89,8 +89,8 @@
             </article>
           </div>
 
-          <div v-else class="rounded-lg border border-slate-200 bg-white shadow-sm">
-            <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+          <div v-else class="grid gap-4">
+            <div class="flex items-center justify-between px-1">
               <div>
                 <h3 class="text-lg font-black text-navy-900">Network updates</h3>
                 <p class="text-sm text-slate-500">Showing {{ visibleFeedItems.length }} of {{ feedItems.length }} updates</p>
@@ -98,7 +98,7 @@
               <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Live feed</span>
             </div>
 
-            <div class="feed-scroll grid max-h-[680px] gap-5 overflow-y-auto p-5">
+            <div class="feed-scroll grid max-h-[680px] gap-5 overflow-y-auto pr-2">
               <article v-for="item in visibleFeedItems" :key="item.title" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-xl">
                 <div class="flex items-start gap-4">
                   <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-navy-900">
