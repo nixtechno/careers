@@ -30,12 +30,12 @@
                 {{ item }}
               </li>
             </ul>
-            <button class="mt-8 rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-navy-900 transition hover:bg-slate-100">
+            <a :href="withBase(currentPathway.path)" class="mt-8 inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-navy-900 transition hover:bg-slate-100" @click.prevent="navigateTo(currentPathway.path)">
               <span>View support pathway</span>
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6" />
               </svg>
-            </button>
+            </a>
           </div>
           <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div class="mb-2 text-sm font-medium text-slate-400">{{ currentPathway.imageLabel }}</div>
@@ -66,6 +66,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { navigateTo, withBase } from '../../utils/navigation'
 
 const activeTab = ref('student')
 const tabs = [
@@ -84,6 +85,7 @@ const pathways = {
     imageAlt: 'Students studying together with laptops',
     metric: '85% resource engagement',
     activity: '2 session requests',
+    path: '/student',
   },
   employer: {
     title: 'Employer and partner engagement',
@@ -94,6 +96,7 @@ const pathways = {
     imageAlt: 'Employer team reviewing candidates in a meeting',
     metric: '48 student interests',
     activity: '7 active postings',
+    path: '/contact',
   },
   alumni: {
     title: 'Alumni mentorship and connection',
@@ -104,6 +107,7 @@ const pathways = {
     imageAlt: 'Alumni and professionals connecting in a collaborative workspace',
     metric: '340 alumni links',
     activity: '12 mentoring requests',
+    path: '/donations/online',
   },
   officer: {
     title: 'Career centre coordination',
@@ -114,6 +118,7 @@ const pathways = {
     imageAlt: 'Career office team planning student support',
     metric: '74% outcome tracking',
     activity: '184 advisory sessions',
+    path: '/admin',
   },
 }
 const currentPathway = computed(() => pathways[activeTab.value])

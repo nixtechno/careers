@@ -27,12 +27,12 @@
             <p class="text-sm uppercase tracking-wide text-emerald-300">Featured resource</p>
             <p class="mt-2 text-2xl font-bold">"Preparing for Your First Graduate Interview"</p>
             <p class="mt-2 text-slate-300">A practical guide for students moving from campus applications to employer conversations.</p>
-            <button class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-semibold text-navy-900">
+            <a :href="withBase('/resources')" class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-semibold text-navy-900" @click.prevent="navigateTo('/resources')">
               <span>Watch Guide</span>
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6" />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -41,6 +41,8 @@
 </template>
 
 <script setup>
+import { navigateTo, withBase } from '../../utils/navigation'
+
 const resources = [
   { short: 'CV', title: 'CV & Cover Letter Documents', description: 'Templates and guides for student applications' },
   { short: 'VID', title: 'Career Development Videos', description: 'Recorded sessions, webinars, and interview lessons' },

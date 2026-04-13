@@ -24,7 +24,7 @@
             <option>Scholarship</option>
             <option>Fellowship</option>
           </select>
-          <button class="btn-primary" style="padding: 8px 16px; font-size: 13px">Find Support</button>
+          <a :href="withBase('/student')" class="btn-primary" style="padding: 8px 16px; font-size: 13px" @click.prevent="navigateTo('/student')">Find Support</a>
         </div>
       </div>
 
@@ -69,7 +69,7 @@
       </div>
 
       <div v-else class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        <article v-for="opp in filteredOpportunities" :key="opp.title" class="opp-card">
+        <article v-for="opp in filteredOpportunities" :key="opp.slug" class="opp-card">
           <div class="mb-4 flex items-start justify-between gap-4">
             <div class="flex min-w-0 items-center gap-3">
               <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white" :style="{ background: opp.color }">
@@ -98,8 +98,8 @@
               </svg>
               Closes {{ opp.deadline }}
             </div>
-            <a href="#" class="btn-ghost" style="padding: 5px 12px; font-size: 11px">
-              <span>Apply</span>
+            <a :href="withBase(`/opportunities/${opp.slug}`)" class="btn-ghost" style="padding: 5px 12px; font-size: 11px" @click.prevent="navigateTo(`/opportunities/${opp.slug}`)">
+              <span>View</span>
               <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6" />
               </svg>
@@ -114,7 +114,7 @@
       </div>
 
       <div class="mt-10 text-center">
-        <a href="#" class="btn-secondary">View All Career Opportunities</a>
+        <a :href="withBase('/opportunities')" class="btn-secondary" @click.prevent="navigateTo('/opportunities')">View All Career Opportunities</a>
       </div>
     </div>
   </section>
@@ -122,6 +122,8 @@
 
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
+import { opportunities } from '../../data/publicContent'
+import { navigateTo, withBase } from '../../utils/navigation'
 
 const activeOppType = ref('All')
 const selectedType = ref('All Types')
@@ -130,81 +132,6 @@ const isLoading = ref(true)
 let loadingTimeout
 
 const oppTypes = ['All', 'Internships', 'Graduate', 'Scholarships', 'Fellowships']
-const opportunities = [
-  {
-    title: 'Product Design Intern',
-    company: 'Flutterwave',
-    location: 'Lagos, Nigeria',
-    type: 'Internship',
-    typeBadge: 'badge-emerald',
-    color: '#059669',
-    desc: 'A practical internship pathway for students building design portfolios and preparing for product roles.',
-    tags: ['Design', 'Figma', 'Remote-friendly'],
-    deadline: 'Feb 10',
-    category: 'Internships',
-  },
-  {
-    title: 'Graduate Software Engineer',
-    company: 'MTN Nigeria',
-    location: 'Abuja, Nigeria',
-    type: 'Graduate',
-    typeBadge: 'badge-navy',
-    color: '#062a3f',
-    desc: 'A structured graduate programme for students preparing to transition from university into engineering work.',
-    tags: ['Engineering', 'Full Stack', 'Structured'],
-    deadline: 'Feb 15',
-    category: 'Graduate',
-  },
-  {
-    title: 'Commonwealth Scholarship',
-    company: 'Commonwealth Foundation',
-    location: 'United Kingdom',
-    type: 'Scholarship',
-    typeBadge: 'badge-soft',
-    color: '#3b6b8f',
-    desc: 'A fully funded postgraduate scholarship route for Nigerian students exploring international study.',
-    tags: ['Fully Funded', 'Masters', 'PhD'],
-    deadline: 'Mar 1',
-    category: 'Scholarships',
-  },
-  {
-    title: 'Policy Innovation Fellow',
-    company: 'NPC Nigeria',
-    location: 'Abuja, Nigeria',
-    type: 'Fellowship',
-    typeBadge: 'badge-deep',
-    color: '#0e3a56',
-    desc: 'A fellowship opportunity for graduates interested in public policy, leadership, and national development.',
-    tags: ['Policy', 'Governance', 'Stipend'],
-    deadline: 'Feb 20',
-    category: 'Fellowships',
-  },
-  {
-    title: 'Data Science Intern',
-    company: 'Access Bank',
-    location: 'Lagos, Nigeria',
-    type: 'Internship',
-    typeBadge: 'badge-emerald',
-    color: '#047857',
-    desc: 'An internship for students building data, analytics, and problem-solving skills in financial services.',
-    tags: ['Python', 'SQL', 'Analytics'],
-    deadline: 'Feb 12',
-    category: 'Internships',
-  },
-  {
-    title: 'Finance Graduate Trainee',
-    company: 'PwC Nigeria',
-    location: 'Lagos, Nigeria',
-    type: 'Graduate',
-    typeBadge: 'badge-navy',
-    color: '#1f4e6f',
-    desc: "A graduate trainee route for students preparing for professional services, audit, and assurance careers.",
-    tags: ['Finance', 'Audit', 'ICAN'],
-    deadline: 'Mar 5',
-    category: 'Graduate',
-  },
-]
-
 const filteredOpportunities = computed(() => {
   const query = searchQuery.value.trim().toLowerCase()
   const tabFiltered = activeOppType.value === 'All'

@@ -28,7 +28,7 @@
                   <h3 class="mt-1 text-xl font-black text-navy-900">{{ event.title }}</h3>
                   <p class="mt-2 leading-7 text-slate-600">{{ event.copy }}</p>
                 </div>
-                <a href="#" class="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50">Read More</a>
+                <a :href="withBase('/events')" class="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" @click.prevent="navigateTo('/events')">Read More</a>
               </div>
             </div>
           </article>
@@ -60,7 +60,7 @@
               Preferred Date
               <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" type="date" />
             </label>
-            <button class="mt-2 rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Book Now</button>
+            <button class="mt-2 rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="navigateTo('/student')">Book Now</button>
           </form>
           </div>
         </aside>
@@ -70,6 +70,8 @@
 </template>
 
 <script setup>
+import { navigateTo, withBase } from '../../utils/navigation'
+
 const events = [
   {
     day: '15',

@@ -14,7 +14,13 @@
 
         <div class="hidden items-center space-x-8 lg:flex">
           <div v-for="item in navItems" :key="item.label" class="relative">
-            <a v-if="!item.children" href="#" class="text-sm font-medium text-slate-600 transition hover:text-navy-900">
+            <a
+              v-if="!item.children"
+              :href="withBase(item.path)"
+              class="text-sm font-medium transition hover:text-navy-900"
+              :class="isActive(item.path) ? 'text-navy-900' : 'text-slate-600'"
+              @click.prevent="goTo(item.path)"
+            >
               {{ item.label }}
             </a>
             <div v-else>
@@ -30,8 +36,14 @@
                 </svg>
               </button>
               <div v-if="openDropdown === item.label" class="absolute left-0 top-full z-50 mt-3 w-48 rounded-lg border border-slate-200 bg-white p-2 shadow-xl">
-                <a v-for="child in item.children" :key="child" href="#" class="block rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-navy-900">
-                  {{ child }}
+                <a
+                  v-for="child in item.children"
+                  :key="child.label"
+                  :href="withBase(child.path)"
+                  class="block rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-navy-900"
+                  @click.prevent="goTo(child.path)"
+                >
+                  {{ child.label }}
                 </a>
               </div>
             </div>
@@ -43,7 +55,7 @@
           <button class="text-sm font-medium text-slate-700 transition hover:text-navy-900" @click="openLoginModal">
             Login
           </button>
-          <button class="rounded-full bg-navy-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-800">
+          <button class="rounded-full bg-navy-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-800" @click="goTo('/student')">
             Book a Session
           </button>
         </div>
@@ -58,19 +70,19 @@
       <div v-if="mobileMenuOpen" class="animate-fadeIn border-t border-slate-200 py-4 lg:hidden">
         <div class="flex flex-col space-y-4">
           <div v-for="item in navItems" :key="item.label">
-            <a href="#" class="block px-2 py-1 text-sm font-medium text-slate-600 transition hover:text-navy-900">
+            <a :href="withBase(item.path)" class="block px-2 py-1 text-sm font-medium text-slate-600 transition hover:text-navy-900" @click.prevent="goTo(item.path)">
               {{ item.label }}
             </a>
             <div v-if="item.children" class="mt-2 grid gap-1 border-l border-slate-200 pl-4">
-              <a v-for="child in item.children" :key="child" href="#" class="px-2 py-1 text-sm text-slate-500 transition hover:text-navy-900">
-                {{ child }}
+              <a v-for="child in item.children" :key="child.label" :href="withBase(child.path)" class="px-2 py-1 text-sm text-slate-500 transition hover:text-navy-900" @click.prevent="goTo(child.path)">
+                {{ child.label }}
               </a>
             </div>
           </div>
           <div class="flex flex-col gap-2 pt-2">
             <ThemeToggle />
             <button class="px-2 py-2 text-left text-sm font-medium text-slate-700" @click="openLoginModal">Login</button>
-            <button class="rounded-full bg-navy-900 px-4 py-2 text-center text-sm font-semibold text-white">Book a Session</button>
+            <button class="rounded-full bg-navy-900 px-4 py-2 text-center text-sm font-semibold text-white" @click="goTo('/student')">Book a Session</button>
           </div>
         </div>
       </div>
@@ -140,21 +152,22 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import ThemeToggle from '../ThemeToggle.vue'
-import { navigateTo } from '../../utils/navigation'
+import { currentRoutePath, navigateTo, withBase } from '../../utils/navigation'
 
 const mobileMenuOpen = ref(false)
 const loginModalOpen = ref(false)
 const activeLoginTab = ref('student')
 const openDropdown = ref('')
+const currentPath = ref(currentRoutePath())
 const navItems = [
-  { label: 'Home' },
-  { label: 'Career Opportunities' },
-  { label: 'Resources' },
-  { label: 'Events' },
-  { label: 'Donations', children: ['Donate Online', 'Bank Details'] },
-  { label: 'Contact' },
+  { label: 'Home', path: '/' },
+  { label: 'Career Opportunities', path: '/opportunities' },
+  { label: 'Resources', path: '/resources' },
+  { label: 'Events', path: '/events' },
+  { label: 'Donations', path: '/donations/online', children: [{ label: 'Donate Online', path: '/donations/online' }, { label: 'Bank Details', path: '/donations/bank-details' }] },
+  { label: 'Contact', path: '/contact' },
 ]
 const loginTabs = [
   {
@@ -184,9 +197,32 @@ const openLoginModal = () => {
   loginModalOpen.value = true
 }
 
+const handleRouteChange = () => {
+  currentPath.value = currentRoutePath()
+}
+
+const isActive = (target) => {
+  if (target === '/') return currentPath.value === '/'
+  return currentPath.value.startsWith(target)
+}
+
+const goTo = (target) => {
+  mobileMenuOpen.value = false
+  openDropdown.value = ''
+  navigateTo(target)
+}
+
 const goToPortal = () => {
   const target = activeLoginTab.value === 'admin' ? '/admin' : '/student'
   loginModalOpen.value = false
   navigateTo(target)
 }
+
+onMounted(() => {
+  window.addEventListener('popstate', handleRouteChange)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('popstate', handleRouteChange)
+})
 </script>

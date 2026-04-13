@@ -21,15 +21,15 @@
           </p>
 
           <div class="mt-8 flex flex-wrap gap-4">
-            <button class="rounded-xl bg-navy-900 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-navy-800">
+            <a :href="withBase('/opportunities')" class="rounded-xl bg-navy-900 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-navy-800" @click.prevent="navigateTo('/opportunities')">
               <span>Explore Career Opportunities</span>
               <svg class="inline-block h-4 w-4 align-[-2px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6" />
               </svg>
-            </button>
-            <button class="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-50">
+            </a>
+            <a :href="withBase('/student')" class="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-50" @click.prevent="navigateTo('/student')">
               Book a Guidance Session
-            </button>
+            </a>
           </div>
 
           <div class="mt-10 flex items-center gap-6 border-t border-slate-200 pt-6">
@@ -75,6 +75,7 @@
 
 <script setup>
 import logoUrl from '../../../logo.png'
+import { navigateTo, withBase } from '../../utils/navigation'
 </script>
 
 <style scoped>

@@ -4,6 +4,12 @@ import SampleOne from './pages/SampleOne.vue'
 import SampleTwo from './pages/SampleTwo.vue'
 import AdminPortal from './pages/admin/AdminPortal.vue'
 import StudentPortal from './pages/student/StudentPortal.vue'
+import ContactPage from './pages/public/ContactPage.vue'
+import DonationPage from './pages/public/DonationPage.vue'
+import EventsPage from './pages/public/EventsPage.vue'
+import OpportunitiesPage from './pages/public/OpportunitiesPage.vue'
+import OpportunityDetailPage from './pages/public/OpportunityDetailPage.vue'
+import ResourcesPage from './pages/public/ResourcesPage.vue'
 import { currentRoutePath } from './utils/navigation'
 
 const path = ref(currentRoutePath())
@@ -13,9 +19,34 @@ const routes = {
   '/sample': SampleTwo,
   '/admin': AdminPortal,
   '/student': StudentPortal,
+  '/opportunities': OpportunitiesPage,
+  '/events': EventsPage,
+  '/resources': ResourcesPage,
+  '/donations/online': DonationPage,
+  '/donations/bank-details': DonationPage,
+  '/contact': ContactPage,
 }
 
-const currentPage = computed(() => routes[path.value] ?? SampleOne)
+const currentRoute = computed(() => {
+  if (path.value.startsWith('/opportunities/')) {
+    return {
+      component: OpportunityDetailPage,
+      props: { slug: path.value.replace('/opportunities/', '') },
+    }
+  }
+
+  if (path.value === '/donations/bank-details') {
+    return {
+      component: DonationPage,
+      props: { mode: 'bank' },
+    }
+  }
+
+  return {
+    component: routes[path.value] ?? SampleOne,
+    props: {},
+  }
+})
 
 const handleNavigation = () => {
   path.value = currentRoutePath()
@@ -31,5 +62,5 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <component :is="currentPage" />
+  <component :is="currentRoute.component" v-bind="currentRoute.props" />
 </template>

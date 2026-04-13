@@ -14,7 +14,7 @@
           <p class="leading-relaxed text-slate-500" style="font-size: 1.05rem">
             A practical centre for career guidance, employability development, employer engagement, and student transition into the workforce.
           </p>
-          <a href="#" class="btn-primary mt-6 inline-flex">Explore All Features</a>
+          <a :href="withBase('/resources')" class="btn-primary mt-6 inline-flex" @click.prevent="navigateTo('/resources')">Explore All Features</a>
         </div>
       </div>
 
@@ -72,6 +72,8 @@
 </template>
 
 <script setup>
+import { navigateTo, withBase } from '../../utils/navigation'
+
 const stats = [
   { value: '4x', label: 'clearer student support' },
   { value: '360°', label: 'student journey view' },

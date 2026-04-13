@@ -1,26 +1,19 @@
 <template>
-  <div class="bg-white font-sans antialiased">
-    <StickyNavbar />
-
-    <main>
-      <HeroSection />
-      <TrustSection />
-      <CareerCentreSection />
-      <CapabilitiesSection />
-      <UserPathwaysSection />
-      <OpportunitiesPreview />
-      <CampusEventsSection />
-      <ResourcesSection />
-      <TestimonialsSection />
-      <FinalCTASection />
-    </main>
-
-    <AppFooter />
-  </div>
+  <PublicLayout>
+    <HeroSection />
+    <TrustSection />
+    <CareerCentreSection />
+    <CapabilitiesSection />
+    <UserPathwaysSection />
+    <OpportunitiesPreview />
+    <CampusEventsSection />
+    <ResourcesSection />
+    <TestimonialsSection />
+    <FinalCTASection />
+  </PublicLayout>
 </template>
 
 <script setup>
-import StickyNavbar from '../components/sample-one/StickyNavbar.vue'
 import HeroSection from '../components/sample-one/HeroSection.vue'
 import TrustSection from '../components/sample-one/TrustSection.vue'
 import CareerCentreSection from '../components/sample-one/CareerCentreSection.vue'
@@ -31,5 +24,5 @@ import CampusEventsSection from '../components/sample-one/CampusEventsSection.vu
 import ResourcesSection from '../components/sample-one/ResourcesSection.vue'
 import TestimonialsSection from '../components/sample-one/TestimonialsSection.vue'
 import FinalCTASection from '../components/sample-one/FinalCTASection.vue'
-import AppFooter from '../components/sample-one/AppFooter.vue'
+import PublicLayout from '../components/sample-one/PublicLayout.vue'
 </script>
