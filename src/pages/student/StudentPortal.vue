@@ -27,10 +27,10 @@
             </div>
           </div>
 
-          <div class="mt-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-4">
+          <div class="mt-5 border-t border-white/10 pt-4">
             <div v-for="stat in networkStats" :key="stat.label">
-              <p class="text-lg font-black">{{ stat.value }}</p>
-              <p class="mt-0.5 text-[10px] font-bold uppercase tracking-wide text-slate-300">{{ stat.label }}</p>
+              <p class="text-2xl font-black">{{ stat.value }}</p>
+              <p class="mt-0.5 text-xs font-bold uppercase tracking-wide text-slate-300">{{ stat.label }}</p>
             </div>
           </div>
 
@@ -284,8 +284,6 @@ const feedNotice = ref('')
 const feedVisibleCount = ref(4)
 const networkStats = [
   { label: 'Connections', value: '248' },
-  { label: 'Alumni', value: '64' },
-  { label: 'Unread', value: '9' },
 ]
 const visibleFeedItems = computed(() => feedItems.slice(0, feedVisibleCount.value))
 const feedItems = [
