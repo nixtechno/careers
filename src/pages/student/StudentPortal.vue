@@ -88,6 +88,7 @@
           <h2 class="mt-2 text-3xl font-black text-navy-900">{{ pageTitle }}</h2>
         </div>
 
+        <div v-if="activePage !== 'feed'" class="portal-scroll grid h-[calc(100vh-220px)] min-h-[420px] content-start gap-6 overflow-y-auto">
         <template v-if="activePage === 'dashboard'">
           <div class="grid gap-4 md:grid-cols-3">
             <article v-for="card in overviewCards" :key="card.label" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
@@ -289,6 +290,7 @@
         </section>
 
         <EmptyPage v-else icon="dashboard" title="Page not found" copy="Choose another item from the student menu." />
+        </div>
       </div>
     </section>
   </main>
