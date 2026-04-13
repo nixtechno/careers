@@ -13,7 +13,8 @@
           <h4 class="font-semibold text-navy-900">{{ group.title }}</h4>
           <ul class="mt-3 space-y-2 text-sm text-slate-500">
             <li v-for="item in group.items" :key="item.label">
-              <a class="transition hover:text-navy-900" :href="withBase(item.path)" @click.prevent="navigateTo(item.path)">{{ item.label }}</a>
+              <button v-if="item.action === 'session'" class="text-left transition hover:text-navy-900" type="button" @click="openSessionModal">{{ item.label }}</button>
+              <a v-else class="transition hover:text-navy-900" :href="withBase(item.path)" @click.prevent="navigateTo(item.path)">{{ item.label }}</a>
             </li>
           </ul>
         </div>
@@ -27,9 +28,10 @@
 
 <script setup>
 import { navigateTo, withBase } from '../../utils/navigation'
+import { openSessionModal } from '../../utils/sessionModal'
 
 const groups = [
-  { title: 'Centre', items: [{ label: 'About CASEC', path: '/' }, { label: 'Career Opportunities', path: '/opportunities' }, { label: 'Book a Session', path: '/student' }] },
+  { title: 'Centre', items: [{ label: 'About CASEC', path: '/' }, { label: 'Career Opportunities', path: '/opportunities' }, { label: 'Book a Session', path: '/student', action: 'session' }] },
   { title: 'Resources', items: [{ label: 'Documents', path: '/resources' }, { label: 'Videos', path: '/resources' }, { label: 'Events', path: '/events' }] },
   { title: 'Connect', items: [{ label: 'Student Connect', path: '/student' }, { label: 'Employer Partners', path: '/contact' }, { label: 'Contact Us', path: '/contact' }] },
 ]

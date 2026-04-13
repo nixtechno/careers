@@ -27,9 +27,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6" />
               </svg>
             </a>
-            <a :href="withBase('/student')" class="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-50" @click.prevent="navigateTo('/student')">
+            <button class="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="openSessionModal">
               Book a Guidance Session
-            </a>
+            </button>
           </div>
 
           <div class="mt-10 flex items-center gap-6 border-t border-slate-200 pt-6">
@@ -76,6 +76,7 @@
 <script setup>
 import logoUrl from '../../../logo.png'
 import { navigateTo, withBase } from '../../utils/navigation'
+import { openSessionModal } from '../../utils/sessionModal'
 </script>
 
 <style scoped>

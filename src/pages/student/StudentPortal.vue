@@ -58,7 +58,15 @@
             <span class="flex h-9 w-9 items-center justify-center rounded-full" :class="activePage === item.id ? 'bg-white/10' : 'bg-slate-100 text-navy-900'">
               <PortalIcon :name="item.icon" />
             </span>
-            {{ item.label }}
+            <span class="flex min-w-0 flex-1 items-center justify-between gap-3">
+              <span class="truncate">{{ item.label }}</span>
+              <span
+                v-if="item.id === 'notifications' && notificationCount"
+                class="flex h-6 min-w-[24px] items-center justify-center rounded-full bg-emerald-100 px-2 text-xs font-black text-emerald-700"
+              >
+                {{ notificationCount }}
+              </span>
+            </span>
           </button>
         </nav>
       </aside>
@@ -227,19 +235,97 @@
         </template>
 
         <section v-else-if="activePage === 'opportunities'" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+          <div v-if="selectedOpportunity" class="p-6">
+            <button class="inline-flex items-center gap-2 text-sm font-bold text-emerald-700" type="button" @click="selectedOpportunity = null">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m6-6-6 6 6 6" />
+              </svg>
+              Back to opportunities
+            </button>
+
+            <div class="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">{{ selectedOpportunity.type }}</p>
+                <h3 class="mt-2 text-3xl font-black text-navy-900">{{ selectedOpportunity.title }}</h3>
+                <p class="mt-3 text-base font-semibold text-slate-500">{{ selectedOpportunity.company }} · {{ selectedOpportunity.location }}</p>
+              </div>
+              <div class="flex h-16 w-16 items-center justify-center rounded-lg text-2xl font-black text-white" :style="{ background: selectedOpportunity.color }">
+                {{ selectedOpportunity.company[0] }}
+              </div>
+            </div>
+
+            <p class="mt-6 max-w-3xl text-base leading-8 text-slate-600">{{ selectedOpportunity.summary }}</p>
+
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div class="rounded-md bg-slate-50 p-4">
+                <p class="text-xs font-bold uppercase tracking-wide text-slate-500">Deadline</p>
+                <p class="mt-1 font-black text-navy-900">{{ selectedOpportunity.deadline }}</p>
+              </div>
+              <div class="rounded-md bg-slate-50 p-4">
+                <p class="text-xs font-bold uppercase tracking-wide text-slate-500">Category</p>
+                <p class="mt-1 font-black text-navy-900">{{ selectedOpportunity.category }}</p>
+              </div>
+              <div class="rounded-md bg-slate-50 p-4">
+                <p class="text-xs font-bold uppercase tracking-wide text-slate-500">Status</p>
+                <p class="mt-1 font-black text-navy-900">{{ isOpportunitySaved(selectedOpportunity) ? 'Saved' : 'Open' }}</p>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h4 class="text-xl font-black text-navy-900">Application checklist</h4>
+              <div class="mt-4 grid gap-3">
+                <div v-for="item in selectedOpportunity.requirements" :key="item" class="flex gap-3 rounded-md bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+                  <svg class="mt-1 h-4 w-4 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.79 6.8-6.79a1 1 0 0 1 1.4 0Z" clip-rule="evenodd" />
+                  </svg>
+                  <span>{{ item }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <button class="rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Start Application</button>
+              <button class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="saveOpportunity(selectedOpportunity)">
+                {{ isOpportunitySaved(selectedOpportunity) ? 'Saved Opportunity' : 'Save Opportunity' }}
+              </button>
+              <button class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="activePage = 'sessions'">Ask for Guidance</button>
+            </div>
+          </div>
+
+          <template v-else>
+          <div class="border-b border-slate-200 bg-slate-50 p-2">
+            <div class="grid gap-2 sm:grid-cols-2">
+              <button
+                v-for="tab in opportunityTabs"
+                :key="tab.id"
+                class="rounded-md px-4 py-3 text-sm font-bold transition"
+                :class="activeOpportunityTab === tab.id ? 'bg-white text-navy-900 shadow-sm' : 'text-slate-500 hover:text-navy-900'"
+                type="button"
+                @click="activeOpportunityTab = tab.id"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+          </div>
           <div class="divide-y divide-slate-100">
-            <article v-for="item in opportunities" :key="item.title" class="flex flex-col gap-4 p-5 transition hover:bg-slate-50 md:flex-row md:items-center md:justify-between">
+            <article v-for="item in currentOpportunities" :key="item.slug" class="flex flex-col gap-4 p-5 transition hover:bg-slate-50 md:flex-row md:items-center md:justify-between">
               <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-2">
                   <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-emerald-700">{{ item.type }}</span>
                   <span class="text-sm font-semibold text-slate-500">{{ item.company }}</span>
                 </div>
                 <h3 class="mt-2 text-lg font-black text-navy-900">{{ item.title }}</h3>
-                <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{{ item.copy }}</p>
+                <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{{ item.desc }}</p>
               </div>
-              <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-white md:flex-shrink-0">Save Opportunity</button>
+              <div class="flex flex-wrap gap-2 md:flex-shrink-0">
+                <button class="w-fit rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="openOpportunity(item)">View Details</button>
+                <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-white" type="button" @click="saveOpportunity(item)">
+                  {{ isOpportunitySaved(item) ? 'Saved' : 'Save' }}
+                </button>
+              </div>
             </article>
           </div>
+          </template>
         </section>
 
         <section v-else-if="activePage === 'sessions'" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
@@ -248,7 +334,7 @@
               <h3 class="text-xl font-black text-navy-900">Guidance Sessions</h3>
               <p class="mt-1 text-sm text-slate-500">Book or review career centre appointments.</p>
             </div>
-            <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800">Book New Session</button>
+            <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="openSessionModal">Book New Session</button>
           </div>
           <div class="mt-6 grid gap-4 md:grid-cols-2">
             <div v-for="session in sessions" :key="session.title" class="rounded-md bg-slate-50 p-4">
@@ -302,8 +388,22 @@
         </section>
 
         <section v-else-if="activePage === 'connections'" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+          <div class="border-b border-slate-200 bg-slate-50 p-2">
+            <div class="grid gap-2 sm:grid-cols-2">
+              <button
+                v-for="tab in connectTabs"
+                :key="tab.id"
+                class="rounded-md px-4 py-3 text-sm font-bold transition"
+                :class="activeConnectTab === tab.id ? 'bg-white text-navy-900 shadow-sm' : 'text-slate-500 hover:text-navy-900'"
+                type="button"
+                @click="activeConnectTab = tab.id"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+          </div>
           <div class="divide-y divide-slate-100">
-            <article v-for="connection in connections" :key="connection.name" class="flex flex-col gap-4 p-5 transition hover:bg-slate-50 sm:flex-row sm:items-center sm:justify-between">
+            <article v-for="connection in currentConnections" :key="connection.name" class="flex flex-col gap-4 p-5 transition hover:bg-slate-50 sm:flex-row sm:items-center sm:justify-between">
               <div class="flex items-start gap-4">
               <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 font-black text-navy-900">{{ connection.initials }}</div>
               <div>
@@ -312,7 +412,7 @@
                 <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{{ connection.copy }}</p>
               </div>
               </div>
-              <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-white sm:flex-shrink-0" type="button">Message</button>
+              <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-white sm:flex-shrink-0" type="button">{{ activeConnectTab === 'connections' ? 'Message' : 'Connect' }}</button>
             </article>
           </div>
         </section>
@@ -326,18 +426,70 @@
           </div>
         </section>
 
-        <section v-else-if="activePage === 'profile'" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-          <div class="grid gap-6 md:grid-cols-[180px_1fr]">
-            <div class="flex h-36 w-36 items-center justify-center rounded-full bg-slate-100 text-4xl font-black text-navy-900">AO</div>
-            <div>
-              <h3 class="text-2xl font-black text-navy-900">Amara Okonkwo</h3>
-              <p class="mt-1 text-slate-500">Computer Science, 400 Level</p>
-              <div class="mt-6 grid gap-3 md:grid-cols-2">
-                <div v-for="item in profile" :key="item.label" class="rounded-md bg-slate-50 p-4">
-                  <p class="text-xs font-bold uppercase tracking-wide text-slate-500">{{ item.label }}</p>
-                  <p class="mt-1 font-semibold text-slate-800">{{ item.value }}</p>
-                </div>
+        <section v-else-if="activePage === 'profile'" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+          <div class="border-b border-slate-200 bg-slate-50 p-2">
+            <div class="grid gap-2 sm:grid-cols-4">
+              <button
+                v-for="tab in profileTabs"
+                :key="tab.id"
+                class="rounded-md px-4 py-3 text-sm font-bold transition"
+                :class="activeProfileTab === tab.id ? 'bg-white text-navy-900 shadow-sm' : 'text-slate-500 hover:text-navy-900'"
+                type="button"
+                @click="activeProfileTab = tab.id"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+          </div>
+
+          <div v-if="activeProfileTab === 'details'" class="p-6">
+            <div class="grid gap-6 lg:grid-cols-[220px_1fr]">
+              <div>
+                <div class="flex h-40 w-40 items-center justify-center rounded-full bg-slate-100 text-4xl font-black text-navy-900">AO</div>
+                <button class="mt-4 rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button">Change Display Image</button>
               </div>
+              <form class="grid gap-4">
+                <div class="grid gap-4 md:grid-cols-2">
+                  <label v-for="field in profileFields" :key="field.label" class="grid gap-2 text-sm font-semibold text-slate-700">
+                    {{ field.label }}
+                    <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" :value="field.value" type="text" />
+                  </label>
+                </div>
+                <label class="grid gap-2 text-sm font-semibold text-slate-700">
+                  Career Bio
+                  <textarea class="min-h-28 rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">Computer Science student interested in data analytics, product thinking, and internship opportunities.</textarea>
+                </label>
+                <button class="w-fit rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Save Changes</button>
+              </form>
+            </div>
+          </div>
+
+          <div v-else-if="activeProfileTab === 'security'" class="p-6">
+            <form class="grid max-w-2xl gap-4">
+              <label v-for="field in securityFields" :key="field" class="grid gap-2 text-sm font-semibold text-slate-700">
+                {{ field }}
+                <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" type="password" />
+              </label>
+              <button class="w-fit rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Update Password</button>
+            </form>
+          </div>
+
+          <div v-else-if="activeProfileTab === 'documents'" class="divide-y divide-slate-100">
+            <div v-for="document in documents" :key="document.name" class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p class="font-black text-navy-900">{{ document.name }}</p>
+                <p class="mt-1 text-sm text-slate-500">{{ document.status }}</p>
+              </div>
+              <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button">Manage</button>
+            </div>
+          </div>
+
+          <div v-else class="p-6">
+            <div class="grid gap-4 md:grid-cols-2">
+              <label v-for="preference in preferences" :key="preference" class="flex items-center justify-between rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
+                {{ preference }}
+                <input class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" type="checkbox" checked />
+              </label>
             </div>
           </div>
         </section>
@@ -349,6 +501,7 @@
   </main>
 
   <EventDetailsModal :event="selectedEvent" @close="selectedEvent = null" @register="registerForEvent" />
+  <BookSessionModal :open="sessionModalOpen" @close="sessionModalOpen = false" />
 
   <div v-if="eventListOpen" class="fixed inset-0 z-[115] flex min-h-screen items-center justify-center bg-navy-900/70 px-4 py-8 backdrop-blur-sm" @click.self="eventListOpen = false">
     <section class="w-full max-w-lg overflow-hidden rounded-lg bg-white shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="event-list-title">
@@ -384,26 +537,46 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PortalIcon from '../../components/portal/PortalIcon.vue'
+import BookSessionModal from '../../components/shared/BookSessionModal.vue'
 import EventDetailsModal from '../../components/shared/EventDetailsModal.vue'
 import InfoBanner from '../../components/shared/InfoBanner.vue'
 import ThemeToggle from '../../components/ThemeToggle.vue'
+import { opportunities as marketplaceOpportunities } from '../../data/publicContent'
+import { openSessionModal } from '../../utils/sessionModal'
 import { withBase } from '../../utils/navigation'
 
 const activePage = ref('dashboard')
+const activeConnectTab = ref('people')
+const activeOpportunityTab = ref('general')
+const activeProfileTab = ref('details')
 const menu = [
   { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
   // Feed is parked for a later networking rollout.
   // { id: 'feed', label: 'Feed', icon: 'feed' },
-  { id: 'connections', label: 'Connections', icon: 'people' },
+  { id: 'connections', label: 'Connect', icon: 'people' },
   { id: 'notifications', label: 'Notifications', icon: 'notifications' },
   { id: 'opportunities', label: 'Opportunities', icon: 'opportunities' },
   { id: 'sessions', label: 'Guidance Sessions', icon: 'sessions' },
   { id: 'resources', label: 'Resources', icon: 'resources' },
   { id: 'events', label: 'Events', icon: 'events' },
   { id: 'profile', label: 'Profile', icon: 'people' },
+]
+const connectTabs = [
+  { id: 'people', label: 'Users on Site' },
+  { id: 'connections', label: 'Your Connections' },
+]
+const opportunityTabs = [
+  { id: 'general', label: 'General Opportunities' },
+  { id: 'saved', label: 'Saved Opportunities' },
+]
+const profileTabs = [
+  { id: 'details', label: 'Details' },
+  { id: 'security', label: 'Security' },
+  { id: 'documents', label: 'Documents' },
+  { id: 'preferences', label: 'Preferences' },
 ]
 const currentMenu = computed(() => menu.find((item) => item.id === activePage.value) ?? menu[0])
 const pageTitle = computed(() => currentMenu.value.label)
@@ -412,8 +585,11 @@ const feedLoading = ref(true)
 const feedNotice = ref('')
 const feedVisibleCount = ref(4)
 const selectedEvent = ref(null)
+const sessionModalOpen = ref(false)
+const selectedOpportunity = ref(null)
 const eventListOpen = ref(false)
 const activeMonthIndex = ref(0)
+const savedOpportunitySlugs = ref(['data-science-intern', 'commonwealth-scholarship'])
 const networkStats = [
   { label: 'Connections', value: '248' },
 ]
@@ -525,12 +701,8 @@ const feedItems = [
     secondaryAction: 'Join',
   },
 ]
-const opportunities = [
-  { type: 'Scholarship', title: 'Aston Ferguson Masters Scholarship', company: 'Aston University', copy: 'Prepare your postgraduate application with centre guidance and scholarship documents.' },
-  { type: 'Graduate Role', title: 'Shell Graduate Programme', company: 'Scholarship Region', copy: 'A structured graduate opportunity for students moving into professional work.' },
-  { type: 'Internship', title: 'Data Science Intern', company: 'Access Bank', copy: 'Build analytics skills through a practical student internship route.' },
-  { type: 'Fellowship', title: 'Policy Innovation Fellow', company: 'NPC Nigeria', copy: 'For graduates interested in leadership, governance, and public policy development.' },
-]
+const savedOpportunities = computed(() => marketplaceOpportunities.filter((opportunity) => savedOpportunitySlugs.value.includes(opportunity.slug)))
+const currentOpportunities = computed(() => activeOpportunityTab.value === 'saved' ? savedOpportunities.value : marketplaceOpportunities)
 const sessions = [
   { title: 'CV Review with Career Representative', date: 'Friday, 10:00 AM' },
   { title: 'Scholarship Application Support', date: 'Next Tuesday, 2:00 PM' },
@@ -615,18 +787,45 @@ const connections = [
   { initials: 'AB', name: 'Aisha Bello', role: 'Alumni • Scholarship Recipient', copy: 'Shares postgraduate scholarship notes and application planning guidance.' },
   { initials: 'DO', name: 'David Ojo', role: '400 Level • Accounting', copy: 'Preparing for graduate trainee applications and professional certification routes.' },
 ]
+const siteUsers = [
+  { initials: 'NK', name: 'Ngozi Kalu', role: '400 Level • Computer Science', copy: 'Interested in software engineering internships and product roles.' },
+  { initials: 'IM', name: 'Ibrahim Musa', role: 'Alumni • Product Manager', copy: 'Open to helping students prepare for product and business analyst interviews.' },
+  { initials: 'YE', name: 'Yewande Esho', role: '300 Level • Economics', copy: 'Exploring scholarships, development roles, and research internships.' },
+  { initials: 'TA', name: 'Tomi Adewale', role: 'Alumni Mentor • Data Analytics', copy: 'Available for portfolio reviews and internship preparation conversations.' },
+]
+const currentConnections = computed(() => activeConnectTab.value === 'connections' ? connections : siteUsers)
 const notifications = [
   { title: 'CV review request received', copy: 'Your document is in the CASEC review queue.' },
   { title: 'Career Fair reminder', copy: 'Registration closes this Friday.' },
   { title: 'New alumni mentor match', copy: 'Tomi Adewale matches your data analytics interest.' },
   { title: 'Scholarship checklist saved', copy: 'You can open it from your resources page.' },
 ]
+const notificationCount = computed(() => Math.min(notifications.length, 99))
 const profile = [
   { label: 'Email', value: 'amara@run.edu.ng' },
   { label: 'Department', value: 'Computer Science' },
   { label: 'Career Interest', value: 'Data Analytics' },
   { label: 'CV Status', value: 'Needs final review' },
 ]
+const profileFields = [
+  { label: 'Full Name', value: 'Amara Okonkwo' },
+  { label: 'Matric Number', value: 'RUN/2021/CSC/014' },
+  { label: 'Email', value: 'amara@run.edu.ng' },
+  { label: 'Phone Number', value: '+234 800 000 0000' },
+  { label: 'Department', value: 'Computer Science' },
+  { label: 'Career Interest', value: 'Data Analytics' },
+]
+const securityFields = ['Current Password', 'New Password', 'Confirm New Password']
+const documents = [
+  { name: 'Current CV', status: 'Uploaded • Needs final review' },
+  { name: 'Cover Letter', status: 'Draft saved' },
+  { name: 'Transcript', status: 'Not uploaded' },
+]
+const preferences = ['Email notifications', 'Opportunity recommendations', 'Alumni connection requests', 'Event reminders']
+
+const handleOpenSessionModal = () => {
+  sessionModalOpen.value = true
+}
 
 const runFeedAction = (item) => {
   feedNotice.value = `${item.secondaryAction} added for "${item.title}".`
@@ -638,6 +837,18 @@ const loadMoreFeed = () => {
 
 const openEvent = (event) => {
   selectedEvent.value = event
+}
+
+const openOpportunity = (opportunity) => {
+  selectedOpportunity.value = opportunity
+}
+
+const isOpportunitySaved = (opportunity) => savedOpportunitySlugs.value.includes(opportunity.slug)
+
+const saveOpportunity = (opportunity) => {
+  if (!isOpportunitySaved(opportunity)) {
+    savedOpportunitySlugs.value = [...savedOpportunitySlugs.value, opportunity.slug]
+  }
 }
 
 const previousMonth = () => {
@@ -661,6 +872,12 @@ onMounted(() => {
   window.setTimeout(() => {
     feedLoading.value = false
   }, 750)
+
+  window.addEventListener('open-session-modal', handleOpenSessionModal)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('open-session-modal', handleOpenSessionModal)
 })
 </script>
 

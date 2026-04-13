@@ -55,7 +55,7 @@
           <button class="text-sm font-medium text-slate-700 transition hover:text-navy-900" @click="openLoginModal">
             Login
           </button>
-          <button class="rounded-full bg-navy-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-800" @click="goTo('/student')">
+          <button class="rounded-full bg-navy-900 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-navy-800" @click="handleBookSession">
             Book a Session
           </button>
         </div>
@@ -82,7 +82,7 @@
           <div class="flex flex-col gap-2 pt-2">
             <ThemeToggle />
             <button class="px-2 py-2 text-left text-sm font-medium text-slate-700" @click="openLoginModal">Login</button>
-            <button class="rounded-full bg-navy-900 px-4 py-2 text-center text-sm font-semibold text-white" @click="goTo('/student')">Book a Session</button>
+            <button class="rounded-full bg-navy-900 px-4 py-2 text-center text-sm font-semibold text-white" @click="handleBookSession">Book a Session</button>
           </div>
         </div>
       </div>
@@ -155,6 +155,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import ThemeToggle from '../ThemeToggle.vue'
 import { currentRoutePath, navigateTo, withBase } from '../../utils/navigation'
+import { openSessionModal } from '../../utils/sessionModal'
 
 const mobileMenuOpen = ref(false)
 const loginModalOpen = ref(false)
@@ -210,6 +211,11 @@ const goTo = (target) => {
   mobileMenuOpen.value = false
   openDropdown.value = ''
   navigateTo(target)
+}
+
+const handleBookSession = () => {
+  mobileMenuOpen.value = false
+  openSessionModal()
 }
 
 const goToPortal = () => {
