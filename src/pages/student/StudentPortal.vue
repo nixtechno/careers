@@ -124,6 +124,32 @@
               </div>
             </div>
           </section>
+
+          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+              <div>
+                <h3 class="text-xl font-black text-navy-900">Upcoming events</h3>
+                <p class="mt-1 text-sm text-slate-500">Open an event to see the details and preparation notes.</p>
+              </div>
+              <button class="text-sm font-bold text-emerald-700" type="button" @click="activePage = 'events'">Open calendar</button>
+            </div>
+            <div class="mt-5 divide-y divide-slate-100">
+              <button
+                v-for="event in events.slice(0, 3)"
+                :key="event.title"
+                class="flex w-full items-center justify-between gap-4 py-4 text-left first:pt-0 last:pb-0"
+                type="button"
+                @click="openEvent(event)"
+              >
+                <span>
+                  <span class="block text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.type }}</span>
+                  <span class="mt-1 block font-black text-navy-900">{{ event.title }}</span>
+                  <span class="mt-1 block text-sm text-slate-500">{{ event.date }} • {{ event.time }}</span>
+                </span>
+                <span class="rounded-md border border-slate-300 px-3 py-2 text-xs font-bold text-navy-900">Details</span>
+              </button>
+            </div>
+          </section>
         </template>
 
         <template v-else-if="activePage === 'feed'">
@@ -240,12 +266,52 @@
           </article>
         </section>
 
-        <section v-else-if="activePage === 'events'" class="grid gap-4 md:grid-cols-2">
-          <article v-for="event in events" :key="event.title" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-sm font-black text-emerald-700">{{ event.date }}</p>
-            <h3 class="mt-2 text-xl font-black text-navy-900">{{ event.title }}</h3>
-            <p class="mt-3 leading-7 text-slate-600">{{ event.copy }}</p>
-          </article>
+        <section v-else-if="activePage === 'events'" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex flex-col justify-between gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-center">
+            <div>
+              <h3 class="text-xl font-black text-navy-900">March - May 2026</h3>
+              <p class="mt-1 text-sm text-slate-500">Tap a marked date to view event details.</p>
+            </div>
+            <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">{{ events.length }} scheduled</span>
+          </div>
+
+          <div class="mt-5 grid gap-6 lg:grid-cols-[1fr_280px]">
+            <div class="grid grid-cols-7 overflow-hidden rounded-lg border border-slate-200 bg-white">
+              <div v-for="day in weekDays" :key="day" class="border-b border-slate-200 bg-slate-50 px-2 py-3 text-center text-xs font-bold uppercase tracking-wide text-slate-500">
+                {{ day }}
+              </div>
+              <button
+                v-for="day in calendarDays"
+                :key="day.key"
+                class="min-h-24 border-b border-r border-slate-200 p-2 text-left transition hover:bg-slate-50"
+                :class="day.isMuted ? 'bg-slate-50/70 text-slate-300' : 'bg-white text-slate-700'"
+                type="button"
+                @click="day.event && openEvent(day.event)"
+              >
+                <span class="text-xs font-bold">{{ day.day }}</span>
+                <span v-if="day.event" class="mt-2 block rounded-md bg-navy-900 px-2 py-1 text-xs font-bold leading-5 text-white">
+                  {{ day.event.title }}
+                </span>
+              </button>
+            </div>
+
+            <aside class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <h4 class="font-black text-navy-900">Event list</h4>
+              <div class="mt-4 grid gap-3">
+                <button
+                  v-for="event in events"
+                  :key="event.title"
+                  class="rounded-md bg-white p-4 text-left transition hover:bg-slate-100"
+                  type="button"
+                  @click="openEvent(event)"
+                >
+                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.date }}</p>
+                  <p class="mt-1 font-black text-navy-900">{{ event.title }}</p>
+                  <p class="mt-1 text-sm text-slate-500">{{ event.time }} • {{ event.venue }}</p>
+                </button>
+              </div>
+            </aside>
+          </div>
         </section>
 
         <section v-else-if="activePage === 'connections'" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
@@ -294,12 +360,15 @@
       </div>
     </section>
   </main>
+
+  <EventDetailsModal :event="selectedEvent" @close="selectedEvent = null" @register="registerForEvent" />
 </template>
 
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PortalIcon from '../../components/portal/PortalIcon.vue'
+import EventDetailsModal from '../../components/shared/EventDetailsModal.vue'
 import InfoBanner from '../../components/shared/InfoBanner.vue'
 import ThemeToggle from '../../components/ThemeToggle.vue'
 import { withBase } from '../../utils/navigation'
@@ -323,6 +392,7 @@ const pageTitle = computed(() => currentMenu.value.label)
 const feedLoading = ref(true)
 const feedNotice = ref('')
 const feedVisibleCount = ref(4)
+const selectedEvent = ref(null)
 const networkStats = [
   { label: 'Connections', value: '248' },
 ]
@@ -449,10 +519,74 @@ const resources = [
   { type: 'Video', title: 'Graduate Interview Guide', copy: 'Recorded tips for preparing employer conversations.' },
   { type: 'Checklist', title: 'Scholarship Application Checklist', copy: 'A step-by-step list for strong scholarship submissions.' },
 ]
+const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const events = [
-  { date: '15 Mar', title: 'Tech Conference 2025', copy: 'Meet industry professionals and explore digital career pathways.' },
-  { date: '22 Apr', title: 'Career Fair & Workshop', copy: 'Connect with recruiters and prepare for internship and graduate applications.' },
+  {
+    day: 15,
+    month: 'Mar',
+    date: '15 Mar',
+    title: 'Tech Conference 2026',
+    type: 'Conference',
+    time: '10:00 AM',
+    venue: 'Main Auditorium',
+    copy: 'Meet industry professionals and explore digital career pathways across software, product, and data.',
+    checklist: ['Bring your student ID', 'Prepare a short introduction', 'Save two questions for the panel'],
+  },
+  {
+    day: 22,
+    month: 'Apr',
+    date: '22 Apr',
+    title: 'Career Fair & Workshop',
+    type: 'Career Fair',
+    time: '11:30 AM',
+    venue: 'University Multipurpose Hall',
+    copy: 'Connect with recruiters and prepare for internship, scholarship, and graduate applications.',
+    checklist: ['Update your CV', 'Dress professionally', 'Review participating employers'],
+  },
+  {
+    day: 9,
+    month: 'May',
+    date: '09 May',
+    title: 'Entrepreneurship Summit',
+    type: 'Summit',
+    time: '1:00 PM',
+    venue: 'Enterprise Hub',
+    copy: 'Learn how students can shape ideas into ventures with mentorship, funding readiness, and market support.',
+    checklist: ['Write down one business idea', 'Bring a notebook', 'Prepare a question for alumni founders'],
+  },
 ]
+const calendarDays = computed(() => {
+  const eventByKey = new Map(events.map((event) => [`${event.month}-${event.day}`, event]))
+  const months = [
+    { label: 'Mar', days: 31, offset: 0 },
+    { label: 'Apr', days: 30, offset: 3 },
+    { label: 'May', days: 31, offset: 5 },
+  ]
+
+  return months.flatMap((month) => {
+    const leading = Array.from({ length: month.offset }, (_, index) => ({
+      key: `${month.label}-muted-start-${index}`,
+      day: '',
+      isMuted: true,
+      event: null,
+    }))
+    const days = Array.from({ length: month.days }, (_, index) => {
+      const day = index + 1
+      return {
+        key: `${month.label}-${day}`,
+        day: `${day}`,
+        isMuted: false,
+        event: eventByKey.get(`${month.label}-${day}`) ?? null,
+      }
+    })
+
+    return [
+      { key: `${month.label}-label`, day: month.label, isMuted: true, event: null },
+      ...leading,
+      ...days,
+    ]
+  })
+})
 const connections = [
   { initials: 'TA', name: 'Tomi Adewale', role: 'Alumni Mentor • Data Analytics', copy: 'Available for portfolio reviews and internship preparation conversations.' },
   { initials: 'CU', name: 'Chinonso Ude', role: '300 Level • Mass Communication', copy: 'Interested in media internships, event volunteering, and alumni networking.' },
@@ -478,6 +612,19 @@ const runFeedAction = (item) => {
 
 const loadMoreFeed = () => {
   feedVisibleCount.value = Math.min(feedVisibleCount.value + 3, feedItems.length)
+}
+
+const openEvent = (event) => {
+  selectedEvent.value = event
+}
+
+const registerForEvent = (event) => {
+  selectedEvent.value = null
+  activePage.value = 'notifications'
+  notifications.unshift({
+    title: `${event.title} registration noted`,
+    copy: `Your interest for ${event.date} at ${event.time} has been added to your student record.`,
+  })
 }
 
 onMounted(() => {
