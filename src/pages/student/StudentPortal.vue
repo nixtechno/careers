@@ -117,8 +117,8 @@
               <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Live feed</span>
             </div>
 
-            <div class="feed-scroll grid max-h-[680px] grid-cols-1 overflow-y-auto border border-slate-200 bg-white pr-3 md:grid-cols-2">
-              <article v-for="item in visibleFeedItems" :key="item.title" class="border-b border-slate-200 p-5 transition hover:bg-slate-50 md:border-r">
+            <div class="feed-scroll grid max-h-[680px] grid-cols-1 overflow-y-auto border border-slate-200 bg-white pr-3">
+              <article v-for="item in visibleFeedItems" :key="item.title" class="border-b border-slate-200 p-5 transition hover:bg-slate-50">
                 <div class="flex items-start gap-4">
                   <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-slate-100 text-navy-900">
                     <PortalIcon :name="item.icon" />
@@ -147,7 +147,7 @@
                 </div>
               </article>
 
-              <div class="p-5 text-center md:col-span-2">
+              <div class="p-5 text-center">
                 <button
                   v-if="visibleFeedItems.length < feedItems.length"
                   class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-navy-900 transition hover:bg-slate-50"
@@ -469,12 +469,6 @@ onMounted(() => {
 
 .feed-scroll::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
-}
-
-@media (min-width: 768px) {
-  .feed-scroll > article:nth-child(2n) {
-    border-right: 0;
-  }
 }
 
 :global(html.dark) .feed-scroll {
