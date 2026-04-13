@@ -50,10 +50,7 @@
       </div>
 
       <div v-if="filteredOpportunities.length === 0" class="mx-auto max-w-3xl px-6">
-        <div class="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-10 text-center">
-          <h2 class="text-xl font-black text-navy-900">No matching opportunities yet</h2>
-          <p class="mt-2 text-slate-500">Try another keyword or type.</p>
-        </div>
+        <EmptyPage icon="opportunities" title="No matching opportunities yet" copy="Try another keyword or opportunity type." />
       </div>
     </section>
   </PublicLayout>
@@ -61,6 +58,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PublicLayout from '../../components/sample-one/PublicLayout.vue'
 import { opportunities } from '../../data/publicContent'
 import { navigateTo, withBase } from '../../utils/navigation'

@@ -27,7 +27,7 @@
             </select>
             <textarea class="min-h-36 rounded-md border border-slate-300 px-4 py-3 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" placeholder="How can we help?"></textarea>
             <button class="rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="messageSent = true">Submit Message</button>
-            <p v-if="messageSent" class="rounded-md bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">Message received. The CASEC team will follow up through the contact details provided.</p>
+            <InfoBanner v-if="messageSent" variant="success" title="Message received" message="The CASEC team will follow up through the contact details provided." />
           </div>
         </form>
       </div>
@@ -38,6 +38,7 @@
 <script setup>
 import { ref } from 'vue'
 import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import InfoBanner from '../../components/shared/InfoBanner.vue'
 
 const messageSent = ref(false)
 const contacts = [

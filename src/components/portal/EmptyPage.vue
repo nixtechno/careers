@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center">
+  <div class="empty-state rounded-xl border border-dashed border-slate-200 bg-white">
     <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-navy-900">
       <PortalIcon :name="icon" />
     </div>
@@ -26,3 +26,15 @@ defineProps({
   },
 })
 </script>
+
+<style scoped>
+.empty-state {
+  align-items: center;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+</style>

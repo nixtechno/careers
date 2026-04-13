@@ -108,9 +108,8 @@
         </article>
       </div>
 
-      <div v-if="!isLoading && filteredOpportunities.length === 0" class="empty-state mt-8">
-        <p class="font-semibold text-slate-700">No matching opportunities yet.</p>
-        <p class="mt-1 text-sm text-slate-500">Try a different role, company, or opportunity type.</p>
+      <div v-if="!isLoading && filteredOpportunities.length === 0" class="mt-8">
+        <EmptyPage icon="opportunities" title="No matching opportunities yet" copy="Try a different role, company, or opportunity type." />
       </div>
 
       <div class="mt-10 text-center">
@@ -122,6 +121,7 @@
 
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue'
+import EmptyPage from '../portal/EmptyPage.vue'
 import { opportunities } from '../../data/publicContent'
 import { navigateTo, withBase } from '../../utils/navigation'
 

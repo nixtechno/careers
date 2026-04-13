@@ -69,7 +69,7 @@
         </div>
 
         <template v-if="activePage === 'feed'">
-          <p v-if="feedNotice" class="rounded-md bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">{{ feedNotice }}</p>
+          <InfoBanner v-if="feedNotice" variant="success" title="Feed updated" :message="feedNotice" />
 
           <div v-if="feedLoading" class="grid gap-4">
             <article v-for="index in 4" :key="index" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
@@ -233,6 +233,7 @@
 import { computed, onMounted, ref } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PortalIcon from '../../components/portal/PortalIcon.vue'
+import InfoBanner from '../../components/shared/InfoBanner.vue'
 import ThemeToggle from '../../components/ThemeToggle.vue'
 import { withBase } from '../../utils/navigation'
 

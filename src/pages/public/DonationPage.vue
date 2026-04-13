@@ -29,7 +29,7 @@
               <option>Career resource development</option>
             </select>
             <button class="rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="donationStarted = true">Continue Donation</button>
-            <p v-if="donationStarted" class="rounded-md bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">Donation request prepared. CASEC can connect this form to a payment provider when ready.</p>
+            <InfoBanner v-if="donationStarted" variant="success" title="Donation request prepared" message="CASEC can connect this form to a payment provider when ready." />
           </form>
         </div>
       </div>
@@ -40,6 +40,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import InfoBanner from '../../components/shared/InfoBanner.vue'
 
 const props = defineProps({
   mode: { type: String, default: 'online' },
