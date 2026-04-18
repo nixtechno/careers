@@ -1,4 +1,4 @@
-﻿<template>
+﻿ï»¿<template>
   <div class="sample-two-page">
 <!-- =====================================================
        NAVBAR
@@ -99,7 +99,7 @@
             </span>
           </div>
 
-          <!-- Headline â€” staggered layout -->
+          <!-- Headline Ã¢â‚¬â€ staggered layout -->
           <h1 class="editorial-heading mb-6" style="font-size:clamp(2.4rem,4vw,3.4rem);color:#fff">
             <span class="block" style="color:rgba(255,255,255,0.55);font-size:0.55em;font-weight:500;letter-spacing:0.01em;margin-bottom:8px">Your career, </span>
             Your Future
@@ -107,7 +107,7 @@
           </h1>
 
           <p class="mb-8 leading-relaxed" style="color:rgba(255,255,255,0.6);font-size:1.05rem;max-width:420px">
-            The institutional platform connecting students, alumni, employers, and career advisors â€” all in one credentialed ecosystem.
+            The institutional platform connecting students, alumni, employers, and career advisors Ã¢â‚¬â€ all in one credentialed ecosystem.
           </p>
 
           <div class="flex flex-wrap gap-3 mb-12">
@@ -184,7 +184,7 @@
                     <div class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold text-white flex-shrink-0" :style="{background: job.color}">{{ job.co[0] }}</div>
                     <div class="flex-1 min-w-0">
                       <p class="text-xs font-semibold text-slate-800 truncate">{{ job.title }}</p>
-                      <p class="text-xs text-slate-400">{{ job.co }} Â· {{ job.loc }}</p>
+                      <p class="text-xs text-slate-400">{{ job.co }} Ã‚Â· {{ job.loc }}</p>
                     </div>
                     <span class="badge" :class="job.badge">{{ job.type }}</span>
                   </div>
@@ -214,7 +214,7 @@
               <p class="text-xs text-slate-500 font-medium">Interviews</p>
             </div>
             <p class="editorial-heading text-xl" style="color:#1e2063">2,840</p>
-            <p class="text-xs font-medium" style="color:#16a34a">â†‘ 18% this month</p>
+            <p class="text-xs font-medium" style="color:#16a34a">Ã¢â€ â€˜ 18% this month</p>
           </div>
 
           <div class="absolute -right-4 bottom-20 card p-3 hidden xl:block" style="min-width:150px">
@@ -225,7 +225,7 @@
               <p class="text-xs text-slate-500 font-medium">Placements</p>
             </div>
             <p class="editorial-heading text-xl" style="color:#1e2063">1,204</p>
-            <p class="text-xs font-medium" style="color:#16a34a">â†‘ 34% year-on-year</p>
+            <p class="text-xs font-medium" style="color:#16a34a">Ã¢â€ â€˜ 34% year-on-year</p>
           </div>
         </div>
       </div>
@@ -257,11 +257,11 @@
   </section>
 
   <!-- =====================================================
-       PLATFORM CAPABILITIES â€” FEATURE COMPOSITION
+       PLATFORM CAPABILITIES Ã¢â‚¬â€ FEATURE COMPOSITION
   ===================================================== -->
   <section class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Section header â€” left aligned -->
+      <!-- Section header Ã¢â‚¬â€ left aligned -->
       <div class="grid lg:grid-cols-2 gap-12 items-end mb-16">
         <div>
           <span class="eyebrow mb-4 inline-flex">Platform Capabilities</span>
@@ -273,7 +273,7 @@
         </div>
         <div>
           <p class="text-slate-500 leading-relaxed" style="font-size:1.05rem">
-            A comprehensive digital career infrastructure purpose-built for higher education institutions â€” integrated, intelligent, and scalable.
+            A comprehensive digital career infrastructure purpose-built for higher education institutions Ã¢â‚¬â€ integrated, intelligent, and scalable.
           </p>
           <a href="#" class="btn-primary mt-6 inline-flex">Explore All Features</a>
         </div>
@@ -288,7 +288,7 @@
           <span class="eyebrow mb-4 inline-flex">Featured</span>
           <h3 class="editorial-heading text-2xl mb-3" style="color:#141440">Smart Job & Internship Listings</h3>
           <p class="text-slate-500 leading-relaxed mb-6" style="max-width:420px">
-            AI-matched opportunities from verified employers. Students see roles curated to their degree, skills, and career goals â€” not just keyword matches.
+            AI-matched opportunities from verified employers. Students see roles curated to their degree, skills, and career goals Ã¢â‚¬â€ not just keyword matches.
           </p>
           <!-- Mini table preview -->
           <div class="widget overflow-hidden">
@@ -328,7 +328,7 @@
           </div>
           <h3 class="font-bold text-slate-800 mb-2">AI CV Builder</h3>
           <p class="text-sm text-slate-500 leading-relaxed">Intelligent templates, real-time feedback, and ATS optimisation for every graduate.</p>
-          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px">Build Your CV â†’</a>
+          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px">Build Your CV Ã¢â€ â€™</a>
         </div>
 
         <!-- Small card: Employer Dashboard -->
@@ -342,7 +342,7 @@
           </div>
           <h3 class="font-bold text-slate-800 mb-2">Employer Dashboard</h3>
           <p class="text-sm text-slate-500 leading-relaxed">Post roles, manage applications, and access a vetted pipeline of university talent.</p>
-          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px">Partner With Us â†’</a>
+          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px">Partner With Us Ã¢â€ â€™</a>
         </div>
 
         <!-- Small card: Appointments -->
@@ -355,8 +355,8 @@
             </svg>
           </div>
           <h3 class="font-bold text-white mb-2">Appointment Booking</h3>
-          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.6)">Students book 1-on-1 sessions with career advisors and mentors â€” instantly, online.</p>
-          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px;color:#2dd4bf;border-color:rgba(45,212,191,0.3)">Book a Session â†’</a>
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.6)">Students book 1-on-1 sessions with career advisors and mentors Ã¢â‚¬â€ instantly, online.</p>
+          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px;color:#2dd4bf;border-color:rgba(45,212,191,0.3)">Book a Session Ã¢â€ â€™</a>
         </div>
 
         <!-- Small card: Alumni networking -->
@@ -370,7 +370,7 @@
           </div>
           <h3 class="font-bold text-slate-800 mb-2">Alumni Network</h3>
           <p class="text-sm text-slate-500 leading-relaxed">Connect with graduated peers, find mentors, and expand your professional circle.</p>
-          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px">Explore Network â†’</a>
+          <a href="#" class="btn-ghost mt-4 inline-flex" style="padding:7px 14px;font-size:12px">Explore Network Ã¢â€ â€™</a>
         </div>
 
         <!-- Wide card: Resources -->
@@ -383,7 +383,7 @@
           </div>
           <div class="flex-1">
             <h3 class="font-bold text-slate-800 mb-1">Career Resources & Events</h3>
-            <p class="text-sm text-slate-500">Workshops, guides, mock interviews, skill courses, and career fairs â€” all curated for your institution.</p>
+            <p class="text-sm text-slate-500">Workshops, guides, mock interviews, skill courses, and career fairs Ã¢â‚¬â€ all curated for your institution.</p>
           </div>
           <a href="#" class="btn-secondary flex-shrink-0" style="padding:8px 16px;font-size:13px">Browse Resources</a>
         </div>
@@ -400,7 +400,7 @@
       <div class="text-center mb-14">
         <span class="eyebrow mb-4 inline-flex">Your Role on the Platform</span>
         <h2 class="editorial-heading mt-4" style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:#141440">One platform,<br>every stakeholder.</h2>
-        <p class="text-slate-500 mt-4 max-w-xl mx-auto">Whether you're launching your career, hiring top graduates, or giving back as an alumnus â€” CareerHub is built for you.</p>
+        <p class="text-slate-500 mt-4 max-w-xl mx-auto">Whether you're launching your career, hiring top graduates, or giving back as an alumnus Ã¢â‚¬â€ CareerHub is built for you.</p>
       </div>
 
       <!-- Tab control -->
@@ -476,7 +476,7 @@
               <circle cx="6" cy="6" r="4.5" stroke="#94a3b8" stroke-width="1.3"/>
               <path d="M9.5 9.5l2.5 2.5" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round"/>
             </svg>
-            <input type="text" placeholder="Search rolesâ€¦" class="input-field pl-9" style="width:200px;padding-top:8px;padding-bottom:8px"/>
+            <input type="text" placeholder="Search rolesÃ¢â‚¬Â¦" class="input-field pl-9" style="width:200px;padding-top:8px;padding-bottom:8px"/>
           </div>
           <select class="select-field" style="width:130px;padding-top:8px;padding-bottom:8px">
             <option>All Types</option>
@@ -525,7 +525,7 @@
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="2.5" width="9" height="8" rx="1" stroke="#94a3b8" stroke-width="1"/><path d="M4 1.5v2M8 1.5v2M1.5 5.5h9" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/></svg>
               Closes {{ opp.deadline }}
             </div>
-            <a href="#" class="btn-ghost" style="padding:5px 12px;font-size:11px">Apply â†’</a>
+            <a href="#" class="btn-ghost" style="padding:5px 12px;font-size:11px">Apply Ã¢â€ â€™</a>
           </div>
         </div>
       </div>
@@ -537,7 +537,7 @@
   </section>
 
   <!-- =====================================================
-       CAREER TOOLS SECTION â€” EDITORIAL LAYOUT
+       CAREER TOOLS SECTION Ã¢â‚¬â€ EDITORIAL LAYOUT
   ===================================================== -->
   <section class="py-24 relative overflow-hidden" style="background:#141440">
     <div class="absolute inset-0 opacity-10" style="background:radial-gradient(ellipse at 70% 50%,#6469f1,transparent 60%)"></div>
@@ -553,11 +553,11 @@
           </h2>
         </div>
         <p class="text-lg leading-relaxed" style="color:rgba(255,255,255,0.5)">
-          From crafting your first CV to preparing for final-round interviews â€” every tool is designed with the realities of early-career job seeking in mind.
+          From crafting your first CV to preparing for final-round interviews Ã¢â‚¬â€ every tool is designed with the realities of early-career job seeking in mind.
         </p>
       </div>
 
-      <!-- Tools grid â€” alternating weight -->
+      <!-- Tools grid Ã¢â‚¬â€ alternating weight -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div v-for="(tool, i) in careerTools" :key="tool.name"
           class="card-dark p-7 relative overflow-hidden hover-lift"
@@ -587,7 +587,7 @@
       <div class="text-center mb-14">
         <span class="eyebrow mb-4 inline-flex">Platform Design System</span>
         <h2 class="editorial-heading mt-4" style="font-size:clamp(1.8rem,3vw,2.4rem);color:#141440">Built with a unified<br>visual language.</h2>
-        <p class="text-slate-500 mt-4 max-w-xl mx-auto">Every page, dashboard, and interaction follows the same design principles â€” consistent, credible, and carefully crafted.</p>
+        <p class="text-slate-500 mt-4 max-w-xl mx-auto">Every page, dashboard, and interaction follows the same design principles Ã¢â‚¬â€ consistent, credible, and carefully crafted.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -631,7 +631,7 @@
         <div class="card p-6">
           <p class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Form Controls</p>
           <div class="space-y-3">
-            <input type="text" class="input-field" placeholder="Search by role or companyâ€¦"/>
+            <input type="text" class="input-field" placeholder="Search by role or companyÃ¢â‚¬Â¦"/>
             <select class="select-field">
               <option>Select department</option>
               <option>Engineering</option>
@@ -662,7 +662,7 @@
             <div class="widget">
               <div class="flex items-center justify-between mb-2">
                 <p class="text-xs font-bold text-slate-600">Applications Sent</p>
-                <span class="badge badge-teal">â†‘ 12%</span>
+                <span class="badge badge-teal">Ã¢â€ â€˜ 12%</span>
               </div>
               <p class="text-2xl editorial-heading" style="color:#1e2063">24</p>
               <div class="w-full bg-slate-100 rounded-full h-1.5 mt-2">
@@ -743,7 +743,7 @@
         </div>
       </div>
 
-      <!-- Testimonials grid â€” varied layout -->
+      <!-- Testimonials grid Ã¢â‚¬â€ varied layout -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         <!-- Large testimonial -->
         <div class="card p-7 lg:row-span-2 flex flex-col" style="background:#1e2063">
@@ -752,7 +752,7 @@
             <div>
               <p class="font-bold text-white">Amara Okonkwo</p>
               <p class="text-xs" style="color:rgba(255,255,255,0.5)">Software Engineer, Google</p>
-              <p class="text-xs" style="color:rgba(255,255,255,0.35)">Class of 2023 Â· Unilag</p>
+              <p class="text-xs" style="color:rgba(255,255,255,0.35)">Class of 2023 Ã‚Â· Unilag</p>
             </div>
           </div>
           <blockquote class="flex-1 text-sm leading-relaxed mb-5" style="color:rgba(255,255,255,0.7)">
@@ -800,7 +800,7 @@
           Your career journey<br>deserves a serious platform.
         </h2>
         <p class="max-w-xl mx-auto leading-relaxed mb-10" style="color:rgba(255,255,255,0.55);font-size:1.05rem">
-          Whether you're a student taking your first step, an employer seeking talent, or an alumnus looking to give back â€” join thousands already on CareerHub.
+          Whether you're a student taking your first step, an employer seeking talent, or an alumnus looking to give back Ã¢â‚¬â€ join thousands already on CareerHub.
         </p>
       </div>
 
@@ -819,7 +819,7 @@
       </div>
 
       <p class="text-center text-xs mt-10" style="color:rgba(255,255,255,0.25)">
-        Free for students Â· No credit card required Â· Institutional SSO support
+        Free for students Ã‚Â· No credit card required Ã‚Â· Institutional SSO support
       </p>
     </div>
   </section>
@@ -867,7 +867,7 @@
 
       <!-- Bottom bar -->
       <div class="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4" style="border-color:rgba(255,255,255,0.06)">
-        <p class="text-xs">Â© 2025 CareerHub. All rights reserved.</p>
+        <p class="text-xs">Ã‚Â© 2025 CareerHub. All rights reserved.</p>
         <div class="flex gap-6 text-xs">
           <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
           <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
@@ -900,9 +900,9 @@ onBeforeUnmount(() => {
 })
 
     const heroStats = [
-      { label: 'Applications', value: '24', change: 'â†‘ 4 this week', up: true },
-      { label: 'Profile Views', value: '186', change: 'â†‘ 22%', up: true },
-      { label: 'Saved Jobs', value: '12', change: 'â†‘ 3 new', up: true },
+      { label: 'Applications', value: '24', change: 'Ã¢â€ â€˜ 4 this week', up: true },
+      { label: 'Profile Views', value: '186', change: 'Ã¢â€ â€˜ 22%', up: true },
+      { label: 'Saved Jobs', value: '12', change: 'Ã¢â€ â€˜ 3 new', up: true },
     ];
 
     const heroJobs = [
@@ -936,14 +936,14 @@ onBeforeUnmount(() => {
       student: {
         eyebrow: 'Student Portal',
         heading: 'Launch your career with confidence.',
-        description: 'Access personalised job matches, build a professional CV, book advisory sessions, and track your progress â€” all from one dashboard.',
+        description: 'Access personalised job matches, build a professional CV, book advisory sessions, and track your progress Ã¢â‚¬â€ all from one dashboard.',
         features: ['AI-powered job and internship matching', 'Professional CV builder with ATS scoring', 'Book 1-on-1 career advisory sessions', 'Attend virtual and campus career events', 'Connect with alumni mentors in your field'],
         cta: 'Create Student Profile',
         widgets: [
-          { title: 'Job Matches', value: '48', sub: 'Updated daily based on your profile', icon: 'ðŸŽ¯', iconBg: '#e0e9ff', color: '#1e2063', pct: 80 },
-          { title: 'CV Score', value: '78%', sub: 'Add skills to boost visibility', icon: 'ðŸ“„', iconBg: '#ccfbf1', color: '#14b8a6', pct: 78 },
-          { title: 'Sessions Booked', value: '3', sub: 'Next: Wednesday 10am', icon: 'ðŸ“…', iconBg: '#fef3c7', color: '#d97706', pct: 60 },
-          { title: 'Applications', value: '12', sub: '3 under review this week', icon: 'ðŸ“¨', iconBg: '#f3e8ff', color: '#7e22ce', pct: 50 },
+          { title: 'Job Matches', value: '48', sub: 'Updated daily based on your profile', icon: 'Ã°Å¸Å½Â¯', iconBg: '#e0e9ff', color: '#1e2063', pct: 80 },
+          { title: 'CV Score', value: '78%', sub: 'Add skills to boost visibility', icon: 'Ã°Å¸â€œâ€ž', iconBg: '#ccfbf1', color: '#14b8a6', pct: 78 },
+          { title: 'Sessions Booked', value: '3', sub: 'Next: Wednesday 10am', icon: 'Ã°Å¸â€œâ€¦', iconBg: '#fef3c7', color: '#d97706', pct: 60 },
+          { title: 'Applications', value: '12', sub: '3 under review this week', icon: 'Ã°Å¸â€œÂ¨', iconBg: '#f3e8ff', color: '#7e22ce', pct: 50 },
         ]
       },
       employer: {
@@ -953,10 +953,10 @@ onBeforeUnmount(() => {
         features: ['Post internship and graduate roles instantly', 'AI-sorted candidate shortlists by role fit', 'Campus engagement and event tools', 'Employer branding page on the portal', 'Analytics dashboard for all your listings'],
         cta: 'Partner as an Employer',
         widgets: [
-          { title: 'Active Listings', value: '7', sub: 'Across 3 role types', icon: 'ðŸ“‹', iconBg: '#e0e9ff', color: '#1e2063', pct: 70 },
-          { title: 'Applicants', value: '214', sub: '48 shortlisted by AI', icon: 'ðŸ‘¥', iconBg: '#ccfbf1', color: '#14b8a6', pct: 90 },
-          { title: 'Avg Time to Hire', value: '14d', sub: '31% faster than market', icon: 'âš¡', iconBg: '#fef3c7', color: '#d97706', pct: 68 },
-          { title: 'Profile Views', value: '1.4k', sub: 'In the last 30 days', icon: 'ðŸ‘', iconBg: '#f3e8ff', color: '#7e22ce', pct: 55 },
+          { title: 'Active Listings', value: '7', sub: 'Across 3 role types', icon: 'Ã°Å¸â€œâ€¹', iconBg: '#e0e9ff', color: '#1e2063', pct: 70 },
+          { title: 'Applicants', value: '214', sub: '48 shortlisted by AI', icon: 'Ã°Å¸â€˜Â¥', iconBg: '#ccfbf1', color: '#14b8a6', pct: 90 },
+          { title: 'Avg Time to Hire', value: '14d', sub: '31% faster than market', icon: 'Ã¢Å¡Â¡', iconBg: '#fef3c7', color: '#d97706', pct: 68 },
+          { title: 'Profile Views', value: '1.4k', sub: 'In the last 30 days', icon: 'Ã°Å¸â€˜Â', iconBg: '#f3e8ff', color: '#7e22ce', pct: 55 },
         ]
       },
       alumni: {
@@ -966,23 +966,23 @@ onBeforeUnmount(() => {
         features: ['List yourself as a mentor in your field', 'Post exclusive alumni opportunities', 'Join alumni chapters and industry groups', 'Offer referrals within the network', 'Access institutional career events'],
         cta: 'Join Alumni Network',
         widgets: [
-          { title: 'Mentees', value: '6', sub: 'Active mentoring relationships', icon: 'ðŸ¤', iconBg: '#f3e8ff', color: '#7e22ce', pct: 60 },
-          { title: 'Referrals Given', value: '18', sub: '4 led to placements', icon: 'ðŸ”—', iconBg: '#ccfbf1', color: '#14b8a6', pct: 75 },
-          { title: 'Network Size', value: '340', sub: 'Alumni connections', icon: 'ðŸŒ', iconBg: '#e0e9ff', color: '#1e2063', pct: 85 },
-          { title: 'Events Attended', value: '11', sub: 'In the last year', icon: 'ðŸŽ“', iconBg: '#fef3c7', color: '#d97706', pct: 45 },
+          { title: 'Mentees', value: '6', sub: 'Active mentoring relationships', icon: 'Ã°Å¸Â¤Â', iconBg: '#f3e8ff', color: '#7e22ce', pct: 60 },
+          { title: 'Referrals Given', value: '18', sub: '4 led to placements', icon: 'Ã°Å¸â€â€”', iconBg: '#ccfbf1', color: '#14b8a6', pct: 75 },
+          { title: 'Network Size', value: '340', sub: 'Alumni connections', icon: 'Ã°Å¸Å’Â', iconBg: '#e0e9ff', color: '#1e2063', pct: 85 },
+          { title: 'Events Attended', value: '11', sub: 'In the last year', icon: 'Ã°Å¸Å½â€œ', iconBg: '#fef3c7', color: '#d97706', pct: 45 },
         ]
       },
       officer: {
         eyebrow: 'Career Centre',
         heading: 'Manage your career centre at scale.',
-        description: 'Run appointments, monitor student engagement, manage employer relationships, and produce impact reports â€” from one admin dashboard.',
+        description: 'Run appointments, monitor student engagement, manage employer relationships, and produce impact reports Ã¢â‚¬â€ from one admin dashboard.',
         features: ['Full appointment booking management system', 'Student progress tracking and analytics', 'Employer relationship management tools', 'Event scheduling and attendance tracking', 'Institution-wide reporting and export'],
         cta: 'Set Up Your Centre',
         widgets: [
-          { title: 'Students Active', value: '3.2k', sub: 'This academic session', icon: 'ðŸŽ“', iconBg: '#e0e9ff', color: '#1e2063', pct: 80 },
-          { title: 'Appointments', value: '184', sub: 'Booked this month', icon: 'ðŸ“…', iconBg: '#ccfbf1', color: '#14b8a6', pct: 65 },
-          { title: 'Employer Partners', value: '62', sub: 'Active across 8 sectors', icon: 'ðŸ¢', iconBg: '#fef3c7', color: '#d97706', pct: 70 },
-          { title: 'Placement Rate', value: '74%', sub: 'Year-on-year +9%', icon: 'ðŸ“ˆ', iconBg: '#f3e8ff', color: '#7e22ce', pct: 74 },
+          { title: 'Students Active', value: '3.2k', sub: 'This academic session', icon: 'Ã°Å¸Å½â€œ', iconBg: '#e0e9ff', color: '#1e2063', pct: 80 },
+          { title: 'Appointments', value: '184', sub: 'Booked this month', icon: 'Ã°Å¸â€œâ€¦', iconBg: '#ccfbf1', color: '#14b8a6', pct: 65 },
+          { title: 'Employer Partners', value: '62', sub: 'Active across 8 sectors', icon: 'Ã°Å¸ÂÂ¢', iconBg: '#fef3c7', color: '#d97706', pct: 70 },
+          { title: 'Placement Rate', value: '74%', sub: 'Year-on-year +9%', icon: 'Ã°Å¸â€œË†', iconBg: '#f3e8ff', color: '#7e22ce', pct: 74 },
         ]
       },
     };
@@ -1005,11 +1005,11 @@ onBeforeUnmount(() => {
     });
 
     const careerTools = [
-      { name: 'AI-Powered CV Builder', desc: 'Build a professional, ATS-optimised CV in minutes. Get real-time feedback, tailored language suggestions, and a confidence score before you send.', icon: 'ðŸ“„', accent: '#6469f1', iconBg: 'rgba(100,105,241,0.18)', tags: ['ATS Optimised', 'Real-time Feedback', 'PDF Export'], cta: 'Build Your CV â†’' },
-      { name: 'Mock Interview Simulator', desc: 'Practice with industry-specific questions, receive AI feedback on your responses, and build interview confidence before the real thing.', icon: 'ðŸŽ¤', accent: '#2dd4bf', iconBg: 'rgba(45,212,191,0.18)', tags: ['AI Feedback', 'Video Support', 'Role-specific'], cta: 'Start Practicing â†’' },
-      { name: 'Career Pathways Guide', desc: 'Explore structured career roadmaps by field, industry, or qualification â€” see exactly what it takes to reach your goal.', icon: 'ðŸ—ºï¸', accent: '#d97706', iconBg: 'rgba(217,119,6,0.18)', tags: ['Roadmaps', 'Sector Guides', 'Salary Data'], cta: 'Explore Pathways â†’' },
-      { name: 'Skill Development Hub', desc: 'Curated learning resources, certifications, and short courses aligned with the skills employers actually demand.', icon: 'ðŸ…', accent: '#7e22ce', iconBg: 'rgba(126,34,206,0.18)', tags: ['Certifications', 'Curated Courses', 'Skills Map'], cta: 'Develop Skills â†’' },
-      { name: 'Events & Career Fairs', desc: 'Register for on-campus career fairs, virtual employer sessions, networking evenings, and alumni roundtables.', icon: 'ðŸ—“ï¸', accent: '#dc2626', iconBg: 'rgba(220,38,38,0.15)', tags: ['Virtual & In-Person', 'Employer Talks', 'Networking'], cta: 'View Events â†’' },
+      { name: 'AI-Powered CV Builder', desc: 'Build a professional, ATS-optimised CV in minutes. Get real-time feedback, tailored language suggestions, and a confidence score before you send.', icon: 'Ã°Å¸â€œâ€ž', accent: '#6469f1', iconBg: 'rgba(100,105,241,0.18)', tags: ['ATS Optimised', 'Real-time Feedback', 'PDF Export'], cta: 'Build Your CV Ã¢â€ â€™' },
+      { name: 'Mock Interview Simulator', desc: 'Practice with industry-specific questions, receive AI feedback on your responses, and build interview confidence before the real thing.', icon: 'Ã°Å¸Å½Â¤', accent: '#2dd4bf', iconBg: 'rgba(45,212,191,0.18)', tags: ['AI Feedback', 'Video Support', 'Role-specific'], cta: 'Start Practicing Ã¢â€ â€™' },
+      { name: 'Career Pathways Guide', desc: 'Explore structured career roadmaps by field, industry, or qualification Ã¢â‚¬â€ see exactly what it takes to reach your goal.', icon: 'Ã°Å¸â€”ÂºÃ¯Â¸Â', accent: '#d97706', iconBg: 'rgba(217,119,6,0.18)', tags: ['Roadmaps', 'Sector Guides', 'Salary Data'], cta: 'Explore Pathways Ã¢â€ â€™' },
+      { name: 'Skill Development Hub', desc: 'Curated learning resources, certifications, and short courses aligned with the skills employers actually demand.', icon: 'Ã°Å¸Ââ€¦', accent: '#7e22ce', iconBg: 'rgba(126,34,206,0.18)', tags: ['Certifications', 'Curated Courses', 'Skills Map'], cta: 'Develop Skills Ã¢â€ â€™' },
+      { name: 'Events & Career Fairs', desc: 'Register for on-campus career fairs, virtual employer sessions, networking evenings, and alumni roundtables.', icon: 'Ã°Å¸â€”â€œÃ¯Â¸Â', accent: '#dc2626', iconBg: 'rgba(220,38,38,0.15)', tags: ['Virtual & In-Person', 'Employer Talks', 'Networking'], cta: 'View Events Ã¢â€ â€™' },
     ];
 
     const successStats = [
@@ -1019,23 +1019,23 @@ onBeforeUnmount(() => {
     ];
 
     const testimonials = [
-      { name: 'Chukwuemeka Eze', role: 'Investment Analyst, Coronation', org: 'OAU Â· Class of 2022', quote: 'The employer connections alone were worth everything. I got my internship through a CareerHub event and converted it to a full offer.', color: '#3233a3', badge: 'badge-navy', tag: 'Employer Connection' },
-      { name: 'Zainab Mahmoud', role: 'HR Director, NestlÃ© Nigeria', org: 'Employer Partner', quote: "We've hired 14 graduates through CareerHub in 18 months. The candidate quality and the platform's ease of use are genuinely impressive.", color: '#14b8a6', badge: 'badge-teal', tag: 'Employer Testimonial' },
-      { name: 'Fatimah Al-Hassan', role: 'Commonwealth Scholar, LSE', org: 'ABU Â· Class of 2023', quote: 'I found the scholarship on CareerHub, used the CV tool to polish my application, and landed a full scholarship to the LSE. I owe the platform a lot.', color: '#7e22ce', badge: 'badge-purple', tag: 'Scholarship Recipient' },
+      { name: 'Chukwuemeka Eze', role: 'Investment Analyst, Coronation', org: 'OAU Ã‚Â· Class of 2022', quote: 'The employer connections alone were worth everything. I got my internship through a CareerHub event and converted it to a full offer.', color: '#3233a3', badge: 'badge-navy', tag: 'Employer Connection' },
+      { name: 'Zainab Mahmoud', role: 'HR Director, NestlÃƒÂ© Nigeria', org: 'Employer Partner', quote: "We've hired 14 graduates through CareerHub in 18 months. The candidate quality and the platform's ease of use are genuinely impressive.", color: '#14b8a6', badge: 'badge-teal', tag: 'Employer Testimonial' },
+      { name: 'Fatimah Al-Hassan', role: 'Commonwealth Scholar, LSE', org: 'ABU Ã‚Â· Class of 2023', quote: 'I found the scholarship on CareerHub, used the CV tool to polish my application, and landed a full scholarship to the LSE. I owe the platform a lot.', color: '#7e22ce', badge: 'badge-purple', tag: 'Scholarship Recipient' },
       { name: 'Tunde Adeyemi', role: 'Career Officer, Covenant University', org: 'Career Centre', quote: "Managing 4,000 students' career journeys used to be chaotic. CareerHub gave our centre structure, visibility, and measurable outcomes.", color: '#d97706', badge: 'badge-amber', tag: 'Career Officer' },
     ];
 
     const sampleProfiles = [
-      { name: 'Ngozi Obi', company: 'Google Â· Lagos', role: 'Alumni', badge: 'badge-purple', year: '2021', color: '#6469f1' },
-      { name: 'Kola Adewale', company: 'Shell Â· Port Harcourt', role: 'Mentor', badge: 'badge-teal', year: '2019', color: '#14b8a6' },
-      { name: 'Yewande Bello', company: 'Jumia Â· Abuja', role: 'Alumni', badge: 'badge-purple', year: '2022', color: '#d97706' },
-      { name: 'Ibrahim Sani', company: 'Access Bank Â· Lagos', role: 'Mentor', badge: 'badge-teal', year: '2018', color: '#3233a3' },
+      { name: 'Ngozi Obi', company: 'Google Ã‚Â· Lagos', role: 'Alumni', badge: 'badge-purple', year: '2021', color: '#6469f1' },
+      { name: 'Kola Adewale', company: 'Shell Ã‚Â· Port Harcourt', role: 'Mentor', badge: 'badge-teal', year: '2019', color: '#14b8a6' },
+      { name: 'Yewande Bello', company: 'Jumia Ã‚Â· Abuja', role: 'Alumni', badge: 'badge-purple', year: '2022', color: '#d97706' },
+      { name: 'Ibrahim Sani', company: 'Access Bank Ã‚Â· Lagos', role: 'Mentor', badge: 'badge-teal', year: '2018', color: '#3233a3' },
     ];
 
     const ctaCards = [
-      { heading: 'For Students', desc: 'Create your profile, find opportunities, and track your career progress.', icon: 'ðŸŽ“', iconBg: 'rgba(100,105,241,0.18)', action: 'Create Student Account', accentColor: '#a5bafc', borderColor: 'rgba(165,186,252,0.3)' },
-      { heading: 'For Employers', desc: 'Post roles, access vetted talent, and build your campus presence.', icon: 'ðŸ¢', iconBg: 'rgba(45,212,191,0.18)', action: 'Become a Partner', accentColor: '#2dd4bf', borderColor: 'rgba(45,212,191,0.3)' },
-      { heading: 'For Alumni', desc: 'Mentor students, share opportunities, and stay connected.', icon: 'ðŸŒ', iconBg: 'rgba(217,119,6,0.15)', action: 'Join the Network', accentColor: '#fbbf24', borderColor: 'rgba(251,191,36,0.25)' },
+      { heading: 'For Students', desc: 'Create your profile, find opportunities, and track your career progress.', icon: 'Ã°Å¸Å½â€œ', iconBg: 'rgba(100,105,241,0.18)', action: 'Create Student Account', accentColor: '#a5bafc', borderColor: 'rgba(165,186,252,0.3)' },
+      { heading: 'For Employers', desc: 'Post roles, access vetted talent, and build your campus presence.', icon: 'Ã°Å¸ÂÂ¢', iconBg: 'rgba(45,212,191,0.18)', action: 'Become a Partner', accentColor: '#2dd4bf', borderColor: 'rgba(45,212,191,0.3)' },
+      { heading: 'For Alumni', desc: 'Mentor students, share opportunities, and stay connected.', icon: 'Ã°Å¸Å’Â', iconBg: 'rgba(217,119,6,0.15)', action: 'Join the Network', accentColor: '#fbbf24', borderColor: 'rgba(251,191,36,0.25)' },
     ];
 
     const socials = ['Tw', 'Li', 'Ig', 'Fb'];
@@ -1048,10 +1048,10 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap');
 
 /* =====================================================
-       DESIGN SYSTEM â€” CSS VARIABLES & GLOBAL TOKENS
+       DESIGN SYSTEM Ã¢â‚¬â€ CSS VARIABLES & GLOBAL TOKENS
     ===================================================== */
     .sample-two-page {
       --color-navy-950: #141440;
@@ -1078,7 +1078,7 @@ onBeforeUnmount(() => {
       min-height: 100vh;
       background: #f8fafc;
       color: #1e293b;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -1087,7 +1087,7 @@ onBeforeUnmount(() => {
     html { scroll-behavior: smooth; }
 
     /* =====================================================
-       DESIGN TOKENS â€” COMPONENT CLASSES
+       DESIGN TOKENS Ã¢â‚¬â€ COMPONENT CLASSES
     ===================================================== */
 
     /* Buttons */
@@ -1099,7 +1099,7 @@ onBeforeUnmount(() => {
       background: #1e2063;
       color: #fff;
       border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       font-size: 14px;
       letter-spacing: -0.01em;
@@ -1122,7 +1122,7 @@ onBeforeUnmount(() => {
       background: #f1f5f9;
       color: #1e293b;
       border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       font-size: 14px;
       letter-spacing: -0.01em;
@@ -1145,7 +1145,7 @@ onBeforeUnmount(() => {
       background: transparent;
       color: #1e2063;
       border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       font-size: 14px;
       letter-spacing: -0.01em;
@@ -1166,7 +1166,7 @@ onBeforeUnmount(() => {
       background: #14b8a6;
       color: #fff;
       border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 600;
       font-size: 14px;
       letter-spacing: -0.01em;
@@ -1252,7 +1252,7 @@ onBeforeUnmount(() => {
       background: #fff;
       border: 1.5px solid #e2e8f0;
       border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-size: 14px;
       color: #1e293b;
       outline: none;
@@ -1270,7 +1270,7 @@ onBeforeUnmount(() => {
       background: #fff;
       border: 1.5px solid #e2e8f0;
       border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-size: 14px;
       color: #1e293b;
       outline: none;
@@ -1393,7 +1393,7 @@ onBeforeUnmount(() => {
 
     /* Editorial heading */
     .editorial-heading {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Manrope', sans-serif;
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.1;

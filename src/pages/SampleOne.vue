@@ -3,6 +3,7 @@
     <HeroSection />
     <TrustSection />
     <CareerCentreSection />
+    <SchoolIntegrationSection />
     <CapabilitiesSection />
     <UserPathwaysSection />
     <OpportunitiesPreview />
@@ -17,6 +18,7 @@
 import HeroSection from '../components/sample-one/HeroSection.vue'
 import TrustSection from '../components/sample-one/TrustSection.vue'
 import CareerCentreSection from '../components/sample-one/CareerCentreSection.vue'
+import SchoolIntegrationSection from '../components/sample-one/SchoolIntegrationSection.vue'
 import CapabilitiesSection from '../components/sample-one/CapabilitiesSection.vue'
 import UserPathwaysSection from '../components/sample-one/UserPathwaysSection.vue'
 import OpportunitiesPreview from '../components/sample-one/OpportunitiesPreview.vue'

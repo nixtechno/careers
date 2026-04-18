@@ -1,22 +1,17 @@
 <template>
-  <main class="min-h-screen bg-slate-50 text-slate-900">
-    <section class="border-b border-slate-200 bg-white">
-      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-        <div>
-          <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Student Connect</p>
-          <h1 class="mt-1 text-2xl font-black text-navy-900">Welcome back, Amara</h1>
-        </div>
-        <div class="flex items-center gap-3">
-          <ThemeToggle />
-          <a class="rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" :href="withBase('/')">
-            Back to site
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="mx-auto grid max-w-7xl items-start gap-6 px-6 py-10 lg:grid-cols-[280px_1fr] lg:px-8">
-      <aside class="max-h-[calc(100vh-140px)] overflow-hidden rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+  <PortalShell
+    brand="Career Path AI"
+    label="RUN/2021/CSC/014"
+    initials="AO"
+    eyebrow="Student Workspace"
+    title="Welcome back, Amara"
+    :page-label="currentMenu.label"
+    :page-title="pageTitle"
+    profile-name="Amara Okonkwo"
+    profile-role="Student Account"
+    search-placeholder="Search recommendations, opportunities, resources..."
+  >
+    <template #sidebar>
         <div class="rounded-lg bg-navy-900 p-5 text-white">
           <div class="flex items-center gap-3">
             <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white text-sm font-black text-navy-900">AO</div>
@@ -36,7 +31,7 @@
 
           <div class="mt-5">
             <div class="flex items-center justify-between text-xs font-semibold text-slate-300">
-              <span>Career profile</span>
+              <span>Career readiness</span>
               <span>78%</span>
             </div>
             <div class="mt-2 h-2 rounded-full bg-white/15">
@@ -45,17 +40,18 @@
           </div>
         </div>
 
-        <p class="mt-6 text-sm font-bold text-slate-500">Student Menu</p>
-        <nav class="portal-scroll mt-5 grid max-h-[360px] gap-2 overflow-y-auto pr-1">
+        <p class="mt-6 px-3 text-xs font-black uppercase tracking-wide text-emerald-200/70">Career Workspace</p>
+        <nav class="portal-scroll mt-4 grid max-h-[360px] gap-1.5 overflow-y-auto pr-1">
           <button
             v-for="item in menu"
             :key="item.id"
-            class="flex items-center gap-3 rounded-md px-3 py-3 text-left text-sm font-semibold transition"
-            :class="activePage === item.id ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-50 hover:text-navy-900'"
+            class="group relative flex items-center gap-3 rounded-lg px-3 py-3 text-left text-sm font-semibold transition"
+            :class="activePage === item.id ? 'bg-white text-navy-900 shadow-lg shadow-black/10' : 'text-slate-300 hover:bg-white/10 hover:text-white'"
             type="button"
             @click="activePage = item.id"
           >
-            <span class="flex h-9 w-9 items-center justify-center rounded-full" :class="activePage === item.id ? 'bg-white/10' : 'bg-slate-100 text-navy-900'">
+            <span v-if="activePage === item.id" class="absolute -left-3 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-emerald-400"></span>
+            <span class="flex h-9 w-9 items-center justify-center rounded-lg transition" :class="activePage === item.id ? 'bg-emerald-50 text-emerald-700' : 'bg-white/10 text-slate-200 group-hover:bg-white/15'">
               <PortalIcon :name="item.icon" />
             </span>
             <span class="flex min-w-0 flex-1 items-center justify-between gap-3">
@@ -69,7 +65,7 @@
             </span>
           </button>
         </nav>
-      </aside>
+    </template>
 
       <div class="grid content-start gap-6">
         <div v-if="false" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
@@ -91,12 +87,7 @@
           </div>
         </div>
 
-        <div v-if="activePage !== 'feed'">
-          <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">{{ currentMenu.label }}</p>
-          <h2 class="mt-2 text-3xl font-black text-navy-900">{{ pageTitle }}</h2>
-        </div>
-
-        <div v-if="activePage !== 'feed'" class="portal-scroll grid h-[calc(100vh-220px)] min-h-[420px] content-start gap-6 overflow-y-auto">
+        <div v-if="activePage !== 'feed'" class="grid content-start gap-6">
         <template v-if="activePage === 'dashboard'">
           <div class="grid gap-4 md:grid-cols-3">
             <article v-for="card in overviewCards" :key="card.label" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
@@ -106,56 +97,33 @@
             </article>
           </div>
 
+          <InfoBanner
+            variant="info"
+            title="Documents still missing"
+            message="Upload your transcript and update your CV before applying to matched roles."
+          />
+
           <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
               <div>
-                <h3 class="text-xl font-black text-navy-900">Next best actions</h3>
-                <p class="mt-1 text-sm text-slate-500">A quick path through the things that need attention.</p>
+                <h3 class="text-xl font-black text-navy-900">Career path recommendation</h3>
+                <p class="mt-1 text-sm text-slate-500">A quick summary of your current recommendation and readiness.</p>
               </div>
+              <span class="w-fit rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">87% fit</span>
             </div>
-            <div class="mt-5 grid gap-4 md:grid-cols-3">
-              <div v-for="step in steps" :key="step" class="rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
-                {{ step }}
+            <div class="mt-5 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+              <div class="rounded-md bg-navy-900 p-5 text-white">
+                <p class="text-xs font-bold uppercase tracking-wide text-emerald-300">Recommended path</p>
+                <h4 class="mt-2 text-2xl font-black">Data Analytics</h4>
+                <p class="mt-3 text-sm leading-6 text-slate-300">Strong performance in quantitative courses, Python interest, and saved analytics roles point to a practical data career route.</p>
               </div>
-            </div>
-          </section>
-
-          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-black text-navy-900">Latest network updates</h3>
-            </div>
-            <div class="mt-5 divide-y divide-slate-100">
-              <div v-for="item in feedItems.slice(0, 3)" :key="item.title" class="py-4 first:pt-0 last:pb-0">
-                <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ item.type }}</p>
-                <p class="mt-1 font-black text-navy-900">{{ item.title }}</p>
-                <p class="mt-1 text-sm leading-6 text-slate-500">{{ item.copy }}</p>
+              <div class="grid gap-3">
+                <div v-for="item in dashboardHighlights" :key="item.label" class="rounded-md bg-slate-50 p-4">
+                  <p class="text-xs font-bold uppercase tracking-wide text-slate-500">{{ item.label }}</p>
+                  <p class="mt-1 font-black text-navy-900">{{ item.title }}</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">{{ item.copy }}</p>
+                </div>
               </div>
-            </div>
-          </section>
-
-          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-              <div>
-                <h3 class="text-xl font-black text-navy-900">Upcoming events</h3>
-                <p class="mt-1 text-sm text-slate-500">Open an event to see the details and preparation notes.</p>
-              </div>
-              <button class="text-sm font-bold text-emerald-700" type="button" @click="activePage = 'events'">Open calendar</button>
-            </div>
-            <div class="mt-5 divide-y divide-slate-100">
-              <button
-                v-for="event in events.slice(0, 3)"
-                :key="event.title"
-                class="flex w-full items-center justify-between gap-4 py-4 text-left first:pt-0 last:pb-0"
-                type="button"
-                @click="openEvent(event)"
-              >
-                <span>
-                  <span class="block text-xs font-bold uppercase tracking-wide text-emerald-700">{{ event.type }}</span>
-                  <span class="mt-1 block font-black text-navy-900">{{ event.title }}</span>
-                  <span class="mt-1 block text-sm text-slate-500">{{ event.date }} • {{ event.time }}</span>
-                </span>
-                <span class="rounded-md border border-slate-300 px-3 py-2 text-xs font-bold text-navy-900">Details</span>
-              </button>
             </div>
           </section>
         </template>
@@ -234,7 +202,23 @@
           </div>
         </template>
 
-        <section v-else-if="activePage === 'opportunities'" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <template v-else-if="activePage === 'opportunities'">
+          <section v-if="!selectedOpportunity" class="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="tab in opportunityTabs"
+                :key="tab.id"
+                class="rounded-md px-4 py-2 text-sm font-black transition"
+                :class="activeOpportunityTab === tab.id ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-navy-900'"
+                type="button"
+                @click="activeOpportunityTab = tab.id"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+          </section>
+
+          <section class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
           <div v-if="selectedOpportunity" class="p-6">
             <button class="inline-flex items-center gap-2 text-sm font-bold text-emerald-700" type="button" @click="selectedOpportunity = null">
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -293,20 +277,6 @@
           </div>
 
           <template v-else>
-          <div class="border-b border-slate-200 bg-slate-50 p-2">
-            <div class="grid gap-2 sm:grid-cols-2">
-              <button
-                v-for="tab in opportunityTabs"
-                :key="tab.id"
-                class="rounded-md px-4 py-3 text-sm font-bold transition"
-                :class="activeOpportunityTab === tab.id ? 'bg-white text-navy-900 shadow-sm' : 'text-slate-500 hover:text-navy-900'"
-                type="button"
-                @click="activeOpportunityTab = tab.id"
-              >
-                {{ tab.label }}
-              </button>
-            </div>
-          </div>
           <div class="divide-y divide-slate-100">
             <article v-for="item in currentOpportunities" :key="item.slug" class="flex flex-col gap-4 p-5 transition hover:bg-slate-50 md:flex-row md:items-center md:justify-between">
               <div class="min-w-0">
@@ -326,31 +296,181 @@
             </article>
           </div>
           </template>
-        </section>
+          </section>
+        </template>
 
-        <section v-else-if="activePage === 'sessions'" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-          <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-            <div>
-              <h3 class="text-xl font-black text-navy-900">Guidance Sessions</h3>
-              <p class="mt-1 text-sm text-slate-500">Book or review career centre appointments.</p>
-            </div>
-            <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="openSessionModal">Book New Session</button>
+        <template v-else-if="activePage === 'sessions'">
+          <div class="grid gap-4 md:grid-cols-3">
+            <article v-for="stat in guidanceStats" :key="stat.label" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold text-slate-500">{{ stat.label }}</p>
+              <p class="mt-3 text-2xl font-black text-navy-900">{{ stat.value }}</p>
+              <p class="mt-2 text-xs font-bold text-emerald-700">{{ stat.note }}</p>
+            </article>
           </div>
-          <div class="mt-6 grid gap-4 md:grid-cols-2">
-            <div v-for="session in sessions" :key="session.title" class="rounded-md bg-slate-50 p-4">
-              <p class="font-bold text-slate-800">{{ session.title }}</p>
-              <p class="mt-1 text-sm text-slate-500">{{ session.date }}</p>
-            </div>
-          </div>
-        </section>
 
-        <section v-else-if="activePage === 'resources'" class="grid gap-4 md:grid-cols-3">
-          <article v-for="resource in resources" :key="resource.title" class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ resource.type }}</p>
-            <h3 class="mt-3 text-lg font-black text-navy-900">{{ resource.title }}</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600">{{ resource.copy }}</p>
-          </article>
-        </section>
+          <section class="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="tab in sessionTabs"
+                :key="tab.id"
+                class="rounded-md px-4 py-2 text-sm font-black transition"
+                :class="activeSessionTab === tab.id ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-navy-900'"
+                type="button"
+                @click="activeSessionTab = tab.id"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+          </section>
+
+          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <template v-if="activeSessionTab === 'overview'">
+              <div class="grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+                <div>
+                  <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+                    <div>
+                      <h3 class="text-xl font-black text-navy-900">Career guidance overview</h3>
+                      <p class="mt-1 text-sm text-slate-500">Book support around career path planning, CV refinement, interviews, and application readiness.</p>
+                    </div>
+                    <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="openSessionModal">Book New Session</button>
+                  </div>
+
+                  <div class="mt-6 rounded-lg bg-slate-50 p-5">
+                    <p class="text-sm font-black uppercase tracking-wide text-emerald-700">Recommended next session</p>
+                    <h4 class="mt-2 text-2xl font-black text-navy-900">CV Review and Career Path Check-in</h4>
+                    <p class="mt-3 text-sm leading-6 text-slate-500">Your current recommendation is strong, but your portfolio and CV still need polishing before applications go out.</p>
+                    <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                      <div class="rounded-md bg-white p-4">
+                        <p class="text-xs font-bold uppercase tracking-wide text-slate-500">Preferred advisor</p>
+                        <p class="mt-1 font-black text-navy-900">Career Centre Team</p>
+                      </div>
+                      <div class="rounded-md bg-white p-4">
+                        <p class="text-xs font-bold uppercase tracking-wide text-slate-500">Best timing</p>
+                        <p class="mt-1 font-black text-navy-900">This week</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-lg border border-slate-200 p-5">
+                  <h4 class="text-lg font-black text-navy-900">Preparation checklist</h4>
+                  <div class="mt-5 grid gap-3">
+                    <div v-for="item in guidanceChecklist" :key="item" class="flex gap-3 rounded-md bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+                      <svg class="mt-1 h-4 w-4 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.79 6.8-6.79a1 1 0 0 1 1.4 0Z" clip-rule="evenodd" />
+                      </svg>
+                      <span>{{ item }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+
+            <template v-else-if="activeSessionTab === 'upcoming'">
+              <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+                <div>
+                  <h3 class="text-xl font-black text-navy-900">Upcoming sessions</h3>
+                  <p class="mt-1 text-sm text-slate-500">Your scheduled appointments and the focus area for each one.</p>
+                </div>
+                <button class="rounded-md bg-navy-900 px-4 py-2 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="openSessionModal">Book New Session</button>
+              </div>
+              <div class="mt-6 divide-y divide-slate-100 rounded-lg border border-slate-200">
+                <div v-for="session in sessions" :key="session.title" class="grid gap-4 p-4 md:grid-cols-[1fr_150px_120px] md:items-center">
+                  <div>
+                    <p class="font-black text-navy-900">{{ session.title }}</p>
+                    <p class="mt-1 text-sm text-slate-500">{{ session.date }} · {{ session.advisor }}</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-600">{{ session.focus }}</p>
+                  </div>
+                  <p class="text-sm font-bold text-slate-500">{{ session.format }}</p>
+                  <span class="w-fit rounded-full px-3 py-1 text-xs font-black" :class="session.statusClass">{{ session.status }}</span>
+                </div>
+              </div>
+            </template>
+
+            <template v-else>
+              <h3 class="text-xl font-black text-navy-900">Guidance resources</h3>
+              <p class="mt-1 text-sm text-slate-500">Start with these before or after a session so the advice is easier to act on.</p>
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                <article v-for="item in guidanceResources" :key="item.title" class="rounded-lg bg-slate-50 p-5">
+                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ item.type }}</p>
+                  <h4 class="mt-3 text-lg font-black text-navy-900">{{ item.title }}</h4>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">{{ item.copy }}</p>
+                </article>
+              </div>
+            </template>
+          </section>
+        </template>
+
+        <template v-else-if="activePage === 'resources'">
+          <div class="grid gap-4 md:grid-cols-3">
+            <article v-for="stat in resourceStats" :key="stat.label" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+              <p class="text-sm font-semibold text-slate-500">{{ stat.label }}</p>
+              <p class="mt-3 text-2xl font-black text-navy-900">{{ stat.value }}</p>
+              <p class="mt-2 text-xs font-bold text-emerald-700">{{ stat.note }}</p>
+            </article>
+          </div>
+
+          <section class="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="tab in resourceTabs"
+                :key="tab.id"
+                class="rounded-md px-4 py-2 text-sm font-black transition"
+                :class="activeResourceTab === tab.id ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-navy-900'"
+                type="button"
+                @click="activeResourceTab = tab.id"
+              >
+                {{ tab.label }}
+              </button>
+            </div>
+          </section>
+
+          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <template v-if="activeResourceTab === 'recommended'">
+              <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+                <div>
+                  <h3 class="text-xl font-black text-navy-900">Recommended resources</h3>
+                  <p class="mt-1 text-sm text-slate-500">Picked for your current career path, guidance sessions, and opportunity applications.</p>
+                </div>
+                <span class="w-fit rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">Matched to your profile</span>
+              </div>
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                <article v-for="resource in resources" :key="resource.title" class="rounded-lg bg-slate-50 p-5">
+                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ resource.type }}</p>
+                  <h3 class="mt-3 text-lg font-black text-navy-900">{{ resource.title }}</h3>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">{{ resource.copy }}</p>
+                </article>
+              </div>
+            </template>
+
+            <template v-else-if="activeResourceTab === 'pathways'">
+              <h3 class="text-xl font-black text-navy-900">Career path learning packs</h3>
+              <p class="mt-1 text-sm text-slate-500">Resources grouped by the direction CASEC is currently recommending for you.</p>
+              <div class="mt-6 grid gap-4 md:grid-cols-2">
+                <article v-for="item in pathwayResources" :key="item.title" class="rounded-lg border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">{{ item.path }}</p>
+                  <h4 class="mt-3 text-lg font-black text-navy-900">{{ item.title }}</h4>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">{{ item.copy }}</p>
+                  <p class="mt-4 text-xs font-black uppercase tracking-wide text-slate-500">{{ item.format }}</p>
+                </article>
+              </div>
+            </template>
+
+            <template v-else>
+              <h3 class="text-xl font-black text-navy-900">Saved library</h3>
+              <p class="mt-1 text-sm text-slate-500">Keep the most useful guides, checklists, and prep materials close by.</p>
+              <div class="mt-6 divide-y divide-slate-100 rounded-lg border border-slate-200">
+                <div v-for="item in savedResources" :key="item.title" class="grid gap-4 p-4 md:grid-cols-[1fr_130px] md:items-center">
+                  <div>
+                    <p class="font-black text-navy-900">{{ item.title }}</p>
+                    <p class="mt-1 text-sm text-slate-500">{{ item.copy }}</p>
+                  </div>
+                  <span class="w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-600">{{ item.type }}</span>
+                </div>
+              </div>
+            </template>
+          </section>
+        </template>
 
         <section v-else-if="activePage === 'events'" class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
           <div class="flex flex-col justify-between gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-center">
@@ -426,79 +546,96 @@
           </div>
         </section>
 
-        <section v-else-if="activePage === 'profile'" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-          <div class="border-b border-slate-200 bg-slate-50 p-2">
-            <div class="grid gap-2 sm:grid-cols-4">
+        <template v-else-if="activePage === 'profile'">
+          <section class="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+            <div class="flex flex-wrap gap-2">
               <button
                 v-for="tab in profileTabs"
                 :key="tab.id"
-                class="rounded-md px-4 py-3 text-sm font-bold transition"
-                :class="activeProfileTab === tab.id ? 'bg-white text-navy-900 shadow-sm' : 'text-slate-500 hover:text-navy-900'"
+                class="rounded-md px-4 py-2 text-sm font-black transition"
+                :class="activeProfileTab === tab.id ? 'bg-navy-900 text-white' : 'text-slate-600 hover:bg-slate-100 hover:text-navy-900'"
                 type="button"
                 @click="activeProfileTab = tab.id"
               >
                 {{ tab.label }}
               </button>
             </div>
-          </div>
+          </section>
 
-          <div v-if="activeProfileTab === 'details'" class="p-6">
-            <div class="grid gap-6 lg:grid-cols-[220px_1fr]">
-              <div>
-                <div class="flex h-40 w-40 items-center justify-center rounded-full bg-slate-100 text-4xl font-black text-navy-900">AO</div>
-                <button class="mt-4 rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button">Change Display Image</button>
-              </div>
-              <form class="grid gap-4">
-                <div class="grid gap-4 md:grid-cols-2">
-                  <label v-for="field in profileFields" :key="field.label" class="grid gap-2 text-sm font-semibold text-slate-700">
-                    {{ field.label }}
-                    <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" :value="field.value" type="text" />
-                  </label>
+          <section class="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <template v-if="activeProfileTab === 'details'">
+              <div class="grid gap-6 lg:grid-cols-[240px_1fr]">
+                <div class="rounded-lg bg-slate-50 p-5">
+                  <div class="flex h-40 w-40 items-center justify-center rounded-full bg-white text-4xl font-black text-navy-900">AO</div>
+                  <button class="mt-4 rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-white" type="button">Change Display Image</button>
+                  <div class="mt-5 grid gap-3 text-sm">
+                    <p class="flex justify-between gap-3"><span class="font-bold text-slate-500">Matric No.</span><span class="font-black text-navy-900">RUN/2021/CSC/014</span></p>
+                    <p class="flex justify-between gap-3"><span class="font-bold text-slate-500">Department</span><span class="font-black text-navy-900">Computer Science</span></p>
+                    <p class="flex justify-between gap-3"><span class="font-bold text-slate-500">Career Path</span><span class="font-black text-navy-900">Data Analytics</span></p>
+                  </div>
                 </div>
-                <label class="grid gap-2 text-sm font-semibold text-slate-700">
-                  Career Bio
-                  <textarea class="min-h-28 rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">Computer Science student interested in data analytics, product thinking, and internship opportunities.</textarea>
-                </label>
-                <button class="w-fit rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Save Changes</button>
-              </form>
-            </div>
-          </div>
-
-          <div v-else-if="activeProfileTab === 'security'" class="p-6">
-            <form class="grid max-w-2xl gap-4">
-              <label v-for="field in securityFields" :key="field" class="grid gap-2 text-sm font-semibold text-slate-700">
-                {{ field }}
-                <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" type="password" />
-              </label>
-              <button class="w-fit rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Update Password</button>
-            </form>
-          </div>
-
-          <div v-else-if="activeProfileTab === 'documents'" class="divide-y divide-slate-100">
-            <div v-for="document in documents" :key="document.name" class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p class="font-black text-navy-900">{{ document.name }}</p>
-                <p class="mt-1 text-sm text-slate-500">{{ document.status }}</p>
+                <form class="grid gap-4">
+                  <div class="grid gap-4 md:grid-cols-2">
+                    <label v-for="field in profileFields" :key="field.label" class="grid gap-2 text-sm font-semibold text-slate-700">
+                      {{ field.label }}
+                      <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" :value="field.value" type="text" />
+                    </label>
+                  </div>
+                  <label class="grid gap-2 text-sm font-semibold text-slate-700">
+                    Career Bio
+                    <textarea class="min-h-28 rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100">Computer Science student interested in data analytics, product thinking, and internship opportunities.</textarea>
+                  </label>
+                  <button class="w-fit rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Save Changes</button>
+                </form>
               </div>
-              <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button">Manage</button>
-            </div>
-          </div>
+            </template>
 
-          <div v-else class="p-6">
-            <div class="grid gap-4 md:grid-cols-2">
-              <label v-for="preference in preferences" :key="preference" class="flex items-center justify-between rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
-                {{ preference }}
-                <input class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" type="checkbox" checked />
-              </label>
-            </div>
-          </div>
-        </section>
+            <template v-else-if="activeProfileTab === 'security'">
+              <div class="max-w-2xl">
+                <h3 class="text-xl font-black text-navy-900">Account security</h3>
+                <p class="mt-1 text-sm text-slate-500">Update your password and keep access to your career workspace protected.</p>
+                <form class="mt-6 grid gap-4">
+                  <label v-for="field in securityFields" :key="field" class="grid gap-2 text-sm font-semibold text-slate-700">
+                    {{ field }}
+                    <input class="rounded-md border border-slate-300 px-4 py-3 text-sm font-normal outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100" type="password" />
+                  </label>
+                  <button class="w-fit rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button">Update Password</button>
+                </form>
+              </div>
+            </template>
+
+            <template v-else-if="activeProfileTab === 'documents'">
+              <h3 class="text-xl font-black text-navy-900">Documents</h3>
+              <p class="mt-1 text-sm text-slate-500">Manage the files used for opportunities, guidance sessions, and employer applications.</p>
+              <div class="mt-6 divide-y divide-slate-100 rounded-lg border border-slate-200">
+                <div v-for="document in documents" :key="document.name" class="flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p class="font-black text-navy-900">{{ document.name }}</p>
+                    <p class="mt-1 text-sm text-slate-500">{{ document.status }}</p>
+                  </div>
+                  <button class="w-fit rounded-md border border-slate-300 px-4 py-2 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button">Manage</button>
+                </div>
+              </div>
+            </template>
+
+            <template v-else>
+              <h3 class="text-xl font-black text-navy-900">Preferences</h3>
+              <p class="mt-1 text-sm text-slate-500">Control the alerts and recommendation updates you want to receive.</p>
+              <div class="mt-6 grid gap-4 md:grid-cols-2">
+                <label v-for="preference in preferences" :key="preference" class="flex items-center justify-between rounded-md bg-slate-50 p-4 text-sm font-semibold text-slate-700">
+                  {{ preference }}
+                  <input class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" type="checkbox" checked />
+                </label>
+              </div>
+            </template>
+          </section>
+        </template>
 
         <EmptyPage v-else icon="dashboard" title="Page not found" copy="Choose another item from the student menu." />
         </div>
       </div>
-    </section>
-  </main>
+
+  </PortalShell>
 
   <EventDetailsModal :event="selectedEvent" @close="selectedEvent = null" @register="registerForEvent" />
   <BookSessionModal :open="sessionModalOpen" @close="sessionModalOpen = false" />
@@ -540,29 +677,30 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
 import PortalIcon from '../../components/portal/PortalIcon.vue'
+import PortalShell from '../../components/portal/PortalShell.vue'
 import BookSessionModal from '../../components/shared/BookSessionModal.vue'
 import EventDetailsModal from '../../components/shared/EventDetailsModal.vue'
 import InfoBanner from '../../components/shared/InfoBanner.vue'
-import ThemeToggle from '../../components/ThemeToggle.vue'
 import { opportunities as marketplaceOpportunities } from '../../data/publicContent'
 import { openSessionModal } from '../../utils/sessionModal'
-import { withBase } from '../../utils/navigation'
 
 const activePage = ref('dashboard')
 const activeConnectTab = ref('people')
 const activeOpportunityTab = ref('general')
 const activeProfileTab = ref('details')
+const activeSessionTab = ref('overview')
+const activeResourceTab = ref('recommended')
 const menu = [
   { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
   // Feed is parked for a later networking rollout.
   // { id: 'feed', label: 'Feed', icon: 'feed' },
-  { id: 'connections', label: 'Connect', icon: 'people' },
-  { id: 'notifications', label: 'Notifications', icon: 'notifications' },
+  // { id: 'connections', label: 'Connect', icon: 'people' },
+  // { id: 'notifications', label: 'Notifications', icon: 'notifications' },
   { id: 'opportunities', label: 'Opportunities', icon: 'opportunities' },
-  { id: 'sessions', label: 'Guidance Sessions', icon: 'sessions' },
+  { id: 'sessions', label: 'Career Guidance', icon: 'sessions' },
   { id: 'resources', label: 'Resources', icon: 'resources' },
   { id: 'events', label: 'Events', icon: 'events' },
-  { id: 'profile', label: 'Profile', icon: 'people' },
+  { id: 'profile', label: 'Profile', icon: 'profile' },
 ]
 const connectTabs = [
   { id: 'people', label: 'Users on Site' },
@@ -571,6 +709,16 @@ const connectTabs = [
 const opportunityTabs = [
   { id: 'general', label: 'General Opportunities' },
   { id: 'saved', label: 'Saved Opportunities' },
+]
+const sessionTabs = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'upcoming', label: 'Upcoming' },
+  { id: 'resources', label: 'Resources' },
+]
+const resourceTabs = [
+  { id: 'recommended', label: 'Recommended' },
+  { id: 'pathways', label: 'Pathways' },
+  { id: 'saved', label: 'Saved' },
 ]
 const profileTabs = [
   { id: 'details', label: 'Details' },
@@ -591,14 +739,29 @@ const eventListOpen = ref(false)
 const activeMonthIndex = ref(0)
 const savedOpportunitySlugs = ref(['data-science-intern', 'commonwealth-scholarship'])
 const networkStats = [
-  { label: 'Connections', value: '248' },
+  { label: 'Career Path Fit', value: '87%' },
+  { label: 'Skill Gaps', value: '3' },
 ]
 const overviewCards = [
-  { label: 'Saved Opportunities', value: '12', note: '3 closing this month' },
-  { label: 'Booked Sessions', value: '2', note: 'Next session: Friday' },
-  { label: 'Unread Notifications', value: '9', note: '2 need action' },
+  { label: 'Profile Completion', value: '78%', note: 'One document still missing' },
+  { label: 'Saved Opportunities', value: '2', note: 'Ready to review' },
+  { label: 'Next Session', value: 'Fri', note: '10:00 AM CV review' },
 ]
-const steps = ['Update your CV document', 'Register for the next career workshop', 'Save two opportunities before Friday']
+const guidanceStats = [
+  { label: 'Upcoming Sessions', value: '2', note: '1 this week' },
+  { label: 'Guidance Focus', value: 'CV Review', note: 'Highest priority' },
+  { label: 'Prep Resources', value: '3', note: 'Ready to open' },
+]
+const resourceStats = [
+  { label: 'Recommended', value: '6', note: 'Matched to your profile' },
+  { label: 'Saved Items', value: '3', note: 'Ready to revisit' },
+  { label: 'Pathway Packs', value: '2', note: 'Based on AI guidance' },
+]
+const dashboardHighlights = [
+  { label: 'Documents', title: 'Transcript still needed', copy: 'Upload your transcript so your profile is fully ready for applications and reviews.' },
+  { label: 'Guidance', title: 'CV review this Friday', copy: 'Your next guidance session is already lined up with the career centre team.' },
+]
+
 const visibleFeedItems = computed(() => feedItems.slice(0, feedVisibleCount.value))
 const feedItems = [
   {
@@ -703,14 +866,50 @@ const feedItems = [
 ]
 const savedOpportunities = computed(() => marketplaceOpportunities.filter((opportunity) => savedOpportunitySlugs.value.includes(opportunity.slug)))
 const currentOpportunities = computed(() => activeOpportunityTab.value === 'saved' ? savedOpportunities.value : marketplaceOpportunities)
+const guidanceChecklist = [
+  'Bring your current CV and latest academic record.',
+  'Write down one target role or career path question.',
+  'Save two opportunities you want feedback on.',
+  'List the skills or interview areas you feel least ready for.',
+]
 const sessions = [
-  { title: 'CV Review with Career Representative', date: 'Friday, 10:00 AM' },
-  { title: 'Scholarship Application Support', date: 'Next Tuesday, 2:00 PM' },
+  {
+    title: 'CV Review with Career Representative',
+    date: 'Friday, 10:00 AM',
+    advisor: 'Mrs. Adebayo',
+    format: 'In-person',
+    focus: 'Refine your CV for analytics internships and align your project descriptions with the recommended path.',
+    status: 'Confirmed',
+    statusClass: 'bg-emerald-50 text-emerald-700',
+  },
+  {
+    title: 'Scholarship Application Support',
+    date: 'Next Tuesday, 2:00 PM',
+    advisor: 'CASEC Guidance Desk',
+    format: 'Virtual',
+    focus: 'Review application structure, supporting documents, and how to present academic strengths clearly.',
+    status: 'Pending',
+    statusClass: 'bg-amber-50 text-amber-700',
+  },
+]
+const guidanceResources = [
+  { type: 'Checklist', title: 'Before Your CV Review', copy: 'A short checklist covering portfolio links, role targeting, and academic highlights.' },
+  { type: 'Template', title: 'Career Path Reflection Sheet', copy: 'Use this to capture interests, strengths, and questions before your next session.' },
+  { type: 'Guide', title: 'Interview Preparation Notes', copy: 'A practical guide for tightening your answers and improving confidence before applications.' },
 ]
 const resources = [
   { type: 'Document', title: 'CV & Cover Letter Pack', copy: 'Templates and examples for student applications.' },
   { type: 'Video', title: 'Graduate Interview Guide', copy: 'Recorded tips for preparing employer conversations.' },
   { type: 'Checklist', title: 'Scholarship Application Checklist', copy: 'A step-by-step list for strong scholarship submissions.' },
+]
+const pathwayResources = [
+  { path: 'Data Analytics', title: 'SQL and Spreadsheet Starter Pack', copy: 'A practical sequence for building confidence in data cleaning, spreadsheets, and beginner SQL tasks.', format: 'Guide + Practice' },
+  { path: 'Data Analytics', title: 'Portfolio Project Workbook', copy: 'Ideas and prompts for turning course work into small analytics portfolio projects you can actually show.', format: 'Workbook' },
+]
+const savedResources = [
+  { type: 'Checklist', title: 'Scholarship Application Checklist', copy: 'A saved step-by-step guide for personal statements, references, and transcripts.' },
+  { type: 'Document', title: 'CV & Cover Letter Pack', copy: 'Your go-to templates for internships, graduate roles, and career centre reviews.' },
+  { type: 'Guide', title: 'Interview Preparation Notes', copy: 'A saved prep note from your last guidance recommendation.' },
 ]
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const calendarMonths = [
@@ -927,3 +1126,4 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+

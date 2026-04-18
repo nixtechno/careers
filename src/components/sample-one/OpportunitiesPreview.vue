@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <section class="sample-one-opportunities bg-white py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
@@ -172,7 +172,7 @@ onMounted(showLoading)
 }
 
 .editorial-heading {
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -201,7 +201,7 @@ onMounted(showLoading)
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   color: #1e293b;
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 14px;
   outline: none;
   padding: 10px 14px;
@@ -317,7 +317,7 @@ onMounted(showLoading)
   border-radius: 10px;
   cursor: pointer;
   display: inline-flex;
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   gap: 8px;

@@ -1,71 +1,97 @@
 <template>
   <section class="relative overflow-hidden bg-white">
-    <div class="absolute inset-0 -z-10">
-      <div class="absolute right-0 top-0 h-[600px] w-[600px] rounded-full bg-emerald-50/40 blur-3xl"></div>
-      <div class="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-navy-50/30 blur-3xl"></div>
-    </div>
-
-    <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-            Career Services Centre - Redeemer's University
-          </div>
-          <h1 class="font-heading text-4xl font-bold leading-tight tracking-tight text-navy-900 lg:text-6xl">
-            Your gateway to<br />
-            <span class="text-emerald-600">professional success</span>
-          </h1>
-          <p class="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
-            Career guidance, internships, scholarships, employer connections, and practical resources for students preparing for life after graduation.
-          </p>
-
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a :href="withBase('/opportunities')" class="rounded-xl bg-navy-900 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-navy-800" @click.prevent="navigateTo('/opportunities')">
-              <span>Explore Career Opportunities</span>
-              <svg class="inline-block h-4 w-4 align-[-2px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6" />
-              </svg>
-            </a>
-            <button class="rounded-xl border border-slate-300 px-6 py-3 font-semibold text-slate-700 transition hover:bg-slate-50" type="button" @click="openSessionModal">
-              Book a Guidance Session
-            </button>
-          </div>
-
-          <div class="mt-10 flex items-center gap-6 border-t border-slate-200 pt-6">
-            <div class="flex -space-x-2">
-              <div class="h-8 w-8 rounded-full border-2 border-white bg-slate-200"></div>
-              <div class="h-8 w-8 rounded-full border-2 border-white bg-slate-300"></div>
-              <div class="h-8 w-8 rounded-full border-2 border-white bg-slate-400"></div>
-            </div>
-            <div class="text-sm text-slate-500">
-              Supporting <span class="font-semibold text-navy-900">students</span>, <span class="font-semibold text-navy-900">alumni</span>, and <span class="font-semibold text-navy-900">employer partners</span>
-            </div>
-          </div>
+    <div class="relative mx-auto max-w-7xl px-6 pb-20 pt-16 lg:px-8 lg:pb-28 lg:pt-24">
+      <div class="mx-auto max-w-4xl text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-emerald-700 shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          AI-driven career intelligence for schools
         </div>
 
-        <div class="relative mx-auto flex min-h-[460px] w-full max-w-xl items-center justify-center">
-          <div class="absolute h-72 w-72 rounded-full border border-emerald-100 bg-emerald-50/40 sm:h-96 sm:w-96"></div>
-          <div class="absolute h-56 w-56 rounded-full border border-navy-100 sm:h-80 sm:w-80"></div>
+        <h1 class="mt-7 font-heading text-4xl font-bold leading-tight tracking-tight text-navy-900 md:text-6xl">
+          Help every student graduate with a clearer career path.
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          Connect school records, student profiles, AI recommendations, employer roles, and career centre activity in one platform.
+        </p>
 
-          <svg class="circular-text absolute h-80 w-80 overflow-visible sm:h-[430px] sm:w-[430px]" viewBox="0 0 430 430" aria-hidden="true">
-            <defs>
-              <path id="heroTextCircle" d="M 215,215 m -178,0 a 178,178 0 1,1 356,0 a 178,178 0 1,1 -356,0" />
-            </defs>
-            <text class="circular-text-copy">
-              <textPath href="#heroTextCircle" startOffset="0%">
-                Career Guidance • Internships • Scholarships • Webinars • Alumni Support • Employer Connections •
-              </textPath>
-            </text>
-          </svg>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <button class="rounded-md bg-navy-900 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-navy-800" type="button" @click="openLogin">
+            Open Platform
+          </button>
+          <button class="rounded-md border border-slate-300 bg-white px-6 py-3 font-semibold text-navy-900 transition hover:bg-slate-50" type="button" @click="navigateTo('/docs')">
+            Read API Docs
+          </button>
+          <button class="rounded-md border border-slate-300 bg-white px-6 py-3 font-semibold text-navy-900 transition hover:bg-slate-50" type="button" @click="navigateTo('/schools/signup')">
+            Register
+          </button>
+        </div>
+      </div>
 
-          <div class="relative z-10 flex h-56 w-56 items-center justify-center rounded-full border border-slate-200 bg-white p-8 shadow-2xl shadow-navy-900/10 sm:h-72 sm:w-72">
-            <img class="max-h-full max-w-full object-contain grayscale" :src="logoUrl" alt="Redeemer's University Career Services Centre logo" />
+      <div class="mx-auto mt-14 max-w-6xl overflow-hidden rounded-lg border border-slate-200 bg-white shadow-2xl shadow-navy-900/10">
+        <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-3">
+          <div class="flex items-center gap-2">
+            <span class="h-3 w-3 rounded-full bg-red-300"></span>
+            <span class="h-3 w-3 rounded-full bg-yellow-300"></span>
+            <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
           </div>
+          <p class="hidden text-xs font-bold uppercase tracking-wide text-slate-500 sm:block">School console preview</p>
+        </div>
 
-          <div class="absolute bottom-8 left-4 z-20 hidden rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-xl sm:block">
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">Career Centre</p>
-            <p class="mt-1 font-black text-navy-900">Guidance for every step</p>
+        <div class="grid bg-white lg:grid-cols-[230px_1fr]">
+          <aside class="border-b border-slate-200 bg-navy-900 p-5 text-white lg:border-b-0 lg:border-r">
+            <p class="text-xs font-bold uppercase tracking-wide text-emerald-300">RUN Extension</p>
+            <h3 class="mt-2 text-xl font-black">Career Intelligence</h3>
+            <div class="mt-6 grid gap-2">
+              <span v-for="item in menuPreview" :key="item" class="rounded-md px-3 py-2 text-sm font-semibold" :class="item === 'AI Recommendations' ? 'bg-white text-navy-900' : 'bg-white/5 text-slate-300'">{{ item }}</span>
+            </div>
+          </aside>
+
+          <div class="grid gap-6 p-5 lg:grid-cols-[1fr_300px] lg:p-7">
+            <section>
+              <div class="grid gap-4 sm:grid-cols-3">
+                <article v-for="metric in metrics" :key="metric.label" class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                  <p class="text-xs font-bold uppercase tracking-wide text-slate-500">{{ metric.label }}</p>
+                  <p class="mt-2 text-2xl font-black text-navy-900">{{ metric.value }}</p>
+                  <p class="mt-1 text-xs font-semibold text-emerald-700">{{ metric.note }}</p>
+                </article>
+              </div>
+
+              <div class="mt-5 rounded-lg border border-slate-200 p-5">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-xs font-bold uppercase tracking-wide text-emerald-700">Recommended career path</p>
+                    <h3 class="mt-2 text-2xl font-black text-navy-900">Data Analytics</h3>
+                    <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+                      Based on year-one to final-year result patterns, SQL interest, saved opportunities, and profile readiness.
+                    </p>
+                  </div>
+                  <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">87% fit</span>
+                </div>
+
+                <div class="mt-5 grid gap-3">
+                  <div v-for="step in nextActions" :key="step" class="flex items-center justify-between rounded-md bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">
+                    <span>{{ step }}</span>
+                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <aside class="rounded-lg border border-slate-200 bg-[#f7faf8] p-5">
+              <p class="text-xs font-bold uppercase tracking-wide text-slate-500">Employer match</p>
+              <h3 class="mt-2 text-xl font-black text-navy-900">48 students matched</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Candidate fit for graduate analyst, data intern, and product operations roles.</p>
+
+              <div class="mt-5 grid gap-3">
+                <div v-for="candidate in candidates" :key="candidate.name" class="rounded-md bg-white p-3 shadow-sm">
+                  <div class="flex items-center justify-between gap-3">
+                    <p class="font-bold text-navy-900">{{ candidate.name }}</p>
+                    <span class="text-xs font-black text-emerald-700">{{ candidate.fit }}</span>
+                  </div>
+                  <p class="mt-1 text-xs text-slate-500">{{ candidate.role }}</p>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </div>
@@ -74,34 +100,25 @@
 </template>
 
 <script setup>
-import logoUrl from '../../../logo.png'
-import { navigateTo, withBase } from '../../utils/navigation'
-import { openSessionModal } from '../../utils/sessionModal'
+import { navigateTo } from '../../utils/navigation'
+
+const menuPreview = ['Student Records', 'AI Recommendations', 'Employer Matches', 'Reports']
+
+const metrics = [
+  { label: 'Synced records', value: '12k', note: '4 imports this week' },
+  { label: 'Career paths', value: '8.2k', note: 'Generated by AI' },
+  { label: 'Employer roles', value: '412', note: 'Active pipeline' },
+]
+
+const nextActions = ['Complete SQL readiness module', 'Book a CV review', 'Apply to Data Science Intern']
+
+const candidates = [
+  { name: 'Amara O.', role: 'Computer Science', fit: '92%' },
+  { name: 'David O.', role: 'Accounting', fit: '86%' },
+  { name: 'Yewande E.', role: 'Economics', fit: '81%' },
+]
+
+const openLogin = () => {
+  window.dispatchEvent(new CustomEvent('open-login-modal'))
+}
 </script>
-
-<style scoped>
-.circular-text {
-  animation: circular-text-spin 24s linear infinite;
-  transform-origin: center;
-}
-
-.circular-text-copy {
-  fill: #062a3f;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-@keyframes circular-text-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .circular-text {
-    animation: none;
-  }
-}
-</style>

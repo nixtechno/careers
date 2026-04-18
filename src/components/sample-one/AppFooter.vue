@@ -5,9 +5,9 @@
         <div>
           <div class="flex items-center gap-2">
             <div class="h-8 w-8 rounded-lg bg-navy-900"></div>
-            <span class="text-lg font-bold text-navy-900">RUN CASEC</span>
+            <span class="text-lg font-bold text-navy-900">CASEC Intelligence</span>
           </div>
-          <p class="mt-4 text-sm text-slate-500">Career Services Centre, Redeemer's University.</p>
+          <p class="mt-4 text-sm text-slate-500">AI-driven career intelligence for schools, students, and employers.</p>
         </div>
         <div v-for="group in groups" :key="group.title">
           <h4 class="font-semibold text-navy-900">{{ group.title }}</h4>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="mt-10 border-t border-slate-100 pt-6 text-center text-sm text-slate-400">
-        (c) 2025 Career Services Centre, Redeemer's University
+        (c) 2025 CASEC Career Intelligence Platform
       </div>
     </div>
   </footer>
@@ -31,8 +31,8 @@ import { navigateTo, withBase } from '../../utils/navigation'
 import { openSessionModal } from '../../utils/sessionModal'
 
 const groups = [
-  { title: 'Centre', items: [{ label: 'About CASEC', path: '/' }, { label: 'Career Opportunities', path: '/opportunities' }, { label: 'Book a Session', path: '/student', action: 'session' }] },
-  { title: 'Resources', items: [{ label: 'Documents', path: '/resources' }, { label: 'Videos', path: '/resources' }, { label: 'Events', path: '/events' }] },
-  { title: 'Connect', items: [{ label: 'Student Connect', path: '/student' }, { label: 'Employer Partners', path: '/contact' }, { label: 'Contact Us', path: '/contact' }] },
+  { title: 'Platform', items: [{ label: 'Overview', path: '/' }, { label: 'Marketplace', path: '/opportunities' }, { label: 'Documentation', path: '/docs' }] },
+  { title: 'Resources', items: [{ label: 'Documents', path: '/resources' }, { label: 'Events', path: '/events' }, { label: 'Book a Session', path: '/student', action: 'session' }] },
+  { title: 'Portals', items: [{ label: 'Student Portal', path: '/student' }, { label: 'School Admin', path: '/admin' }, { label: 'Employer Portal', path: '/employer' }] },
 ]
 </script>

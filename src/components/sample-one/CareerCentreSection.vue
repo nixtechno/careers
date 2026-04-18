@@ -3,12 +3,12 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
-          <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">University career centre</p>
+          <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Career intelligence platform</p>
           <h2 class="mt-4 max-w-xl text-4xl font-black leading-tight text-navy-900 lg:text-5xl">
-            Guidance, opportunity, and employability support in one place.
+            Built for schools that want career outcomes from academic data.
           </h2>
           <p class="mt-5 max-w-xl leading-8 text-slate-600">
-            Built for a university environment, the centre helps students discover career paths, prepare for work, meet employers, and move confidently from campus into professional life.
+            The platform connects school records, student profiles, AI recommendations, employer demand, and career centre activity into one coordinated system.
           </p>
         </div>
 
@@ -71,12 +71,12 @@ const statements = [
   {
     id: 'vision',
     label: 'Vision',
-    copy: 'Empower students to discover their professional direction and build the confidence, skills, and networks needed for meaningful work.',
+    copy: 'Help every school convert academic history into practical career direction, employability support, and measurable graduate outcomes.',
   },
   {
     id: 'mission',
     label: 'Mission',
-    copy: 'Provide career guidance, connect students with employers and alumni, and improve employability through resources, workshops, and advisory sessions.',
+    copy: 'Integrate student data, recommend career paths with AI, connect employers to ready talent, and give schools the reports they need to improve outcomes.',
   },
 ]
 
@@ -85,23 +85,23 @@ const currentStatement = computed(() => statements.find((item) => item.id === ac
 const services = [
   {
     icon: 'guidance',
-    title: 'Career Guidance',
-    copy: 'Personalised support for career planning, CV review, interview preparation, and workplace readiness.',
+    title: 'School Integration',
+    copy: 'Dedicated school extensions, API keys, student signup rules, and data import flows for existing systems.',
   },
   {
     icon: 'webinar',
-    title: 'Webinars & Workshops',
-    copy: 'Practical sessions led by career officers, alumni, employers, and industry professionals.',
+    title: 'AI Career Paths',
+    copy: 'Recommendations based on academic records, skills, interests, projects, and graduate readiness signals.',
   },
   {
     icon: 'employer',
-    title: 'Employer Relations',
-    copy: 'Structured connections between students and trusted organisations recruiting graduate talent.',
+    title: 'Employer Portal',
+    copy: 'Recruiters can post roles, review matched profiles, manage applications, and plan campus engagement.',
   },
   {
     icon: 'library',
-    title: 'Resource Library',
-    copy: 'Documents, guides, videos, and templates that help students prepare at every stage.',
+    title: 'Outcome Reports',
+    copy: 'Career centres can track readiness, applications, events, placements, and employer engagement.',
   },
 ]
 </script>

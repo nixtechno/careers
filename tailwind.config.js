@@ -19,8 +19,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        heading: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        heading: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {
         fadeIn: 'fadeIn 0.2s ease-in-out',

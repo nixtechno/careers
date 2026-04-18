@@ -9,7 +9,7 @@
       </div>
       <div class="mt-10 flex justify-center">
         <div class="rounded-full border border-slate-200 bg-slate-50 px-6 py-2 text-sm text-slate-600">
-          Career guidance, webinars, documents, videos, employer links, and student support from one centre.
+          Multi-school integration, academic records, AI recommendations, employer matching, and outcome reporting in one platform.
         </div>
       </div>
     </div>
@@ -18,9 +18,9 @@
 
 <script setup>
 const metrics = [
-  { value: '12k+', label: 'Students Supported' },
-  { value: '340+', label: 'Employer & Alumni Links' },
-  { value: '2,800+', label: 'Opportunities Shared' },
-  { value: '94%', label: 'Student Satisfaction' },
+  { value: '8+', label: 'School Extensions' },
+  { value: '12k+', label: 'Student Records Ready' },
+  { value: '340+', label: 'Employer Partners' },
+  { value: '94%', label: 'Recommendation Confidence' },
 ]
 </script>

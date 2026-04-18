@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <section class="sample-one-capabilities bg-white py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-16 grid items-end gap-12 lg:grid-cols-2">
@@ -6,13 +6,13 @@
           <span class="eyebrow mb-4 inline-flex">Platform Capabilities</span>
           <div class="section-line mb-5"></div>
           <h2 class="editorial-heading" style="font-size: clamp(1.9rem, 3.5vw, 2.8rem); color: #062a3f">
-            Everything a career centre needs,<br />
-            <em style="font-style: normal; color: #059669">built for student success.</em>
+            Everything schools need to connect<br />
+            <em style="font-style: normal; color: #059669">records, careers, and employers.</em>
           </h2>
         </div>
         <div>
           <p class="leading-relaxed text-slate-500" style="font-size: 1.05rem">
-            A practical centre for career guidance, employability development, employer engagement, and student transition into the workforce.
+            A practical platform for integrations, career path intelligence, opportunity matching, employer recruitment, and outcome visibility.
           </p>
           <a :href="withBase('/resources')" class="btn-primary mt-6 inline-flex" @click.prevent="navigateTo('/resources')">Explore All Features</a>
         </div>
@@ -24,10 +24,10 @@
           <div class="relative">
             <span class="eyebrow mb-5 inline-flex">Why it exists</span>
           <h3 class="editorial-heading max-w-2xl text-3xl text-white">
-              A connected university career centre, not another list of links.
+              A connected career operating system, not another list of links.
             </h3>
             <p class="mt-5 max-w-2xl text-base leading-8" style="color: rgba(255, 255, 255, 0.68)">
-              RUN CASEC brings students, alumni, employers, and career officers into one shared experience. Every opportunity, event, appointment, resource, and outcome supports the same goal: helping students prepare for professional life after graduation.
+              The platform brings schools, students, employers, and career teams into one shared experience. Academic records inform career guidance, recommendations point students toward action, and every opportunity feeds outcome data back to the institution.
             </p>
 
             <div class="mt-10 grid gap-4 sm:grid-cols-3">
@@ -41,9 +41,9 @@
 
         <aside class="rounded-2xl border border-slate-200 bg-slate-50 p-7">
           <p class="text-sm font-bold uppercase tracking-wide text-emerald-700">Built around outcomes</p>
-          <h3 class="mt-4 text-2xl font-black text-navy-900">The centre keeps the whole journey visible.</h3>
+          <h3 class="mt-4 text-2xl font-black text-navy-900">The school sees the journey from admission to employment.</h3>
           <p class="mt-4 leading-7 text-slate-600">
-            From first-year exploration to graduate placement, the career centre can see where students need guidance, which opportunities are active, and how employer relationships are creating real outcomes.
+            From year-one results to graduate placement, career teams can see which students need guidance, where skill gaps are growing, and which employers are converting interest into real opportunities.
           </p>
 
           <div class="mt-7 space-y-4">
@@ -75,36 +75,35 @@
 import { navigateTo, withBase } from '../../utils/navigation'
 
 const stats = [
-  { value: '4x', label: 'clearer student support' },
-  { value: '360°', label: 'student journey view' },
-  { value: '1 hub', label: 'for guidance and opportunities' },
+  { value: '4x', label: 'faster career insight' },
+  { value: '360°', label: 'student data view' },
+  { value: '1 hub', label: 'for schools and employers' },
 ]
 
 const proofPoints = [
   {
     step: '01',
-    title: 'Students know where to begin',
-    copy: 'Opportunities, resources, events, and appointments sit in one guided career centre flow.',
+    title: 'Schools integrate once',
+    copy: 'Student records, departments, results, and signup rules flow into one school-owned extension.',
   },
   {
     step: '02',
-    title: 'Employers meet prepared students',
-    copy: 'The centre connects trusted partners to students with relevant interests, skills, and career goals.',
+    title: 'AI recommends next steps',
+    copy: 'Students receive career path, skill gap, learning, and opportunity recommendations based on their profile.',
   },
   {
     step: '03',
-    title: 'Career officers see impact',
-    copy: 'Advisory activity, events, applications, and placements become easier to track and improve.',
+    title: 'Employers meet prepared students',
+    copy: 'Recruiters see better-matched candidates while schools track applications, engagement, and outcomes.',
   },
 ]
 
 const journey = [
-  { number: '01', title: 'Discover', copy: 'Students explore scholarships, internships, graduate roles, events, and resources.' },
-  { number: '02', title: 'Prepare', copy: 'Guidance sessions, CV support, and webinars help them become application-ready.' },
-  { number: '03', title: 'Connect', copy: 'Employers, alumni, and career representatives meet students with the right context.' },
-  { number: '04', title: 'Measure', copy: 'The centre tracks engagement, placements, and outcomes with clearer data.' },
-]
-</script>
+  { number: '01', title: 'Integrate', copy: 'Schools connect student records through API, document upload, or CSV import.' },
+  { number: '02', title: 'Recommend', copy: 'AI maps results, interests, and skills into career paths and readiness gaps.' },
+  { number: '03', title: 'Match', copy: 'Students see relevant opportunities while employers review stronger candidate fits.' },
+  { number: '04', title: 'Report', copy: 'Career teams track engagement, applications, placements, and institutional outcomes.' },
+]</script>
 
 <style scoped>
 .sample-one-capabilities {
@@ -114,7 +113,7 @@ const journey = [
 }
 
 .editorial-heading {
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-weight: 800;
   letter-spacing: 0;
   line-height: 1.1;
@@ -201,7 +200,7 @@ const journey = [
   border-radius: 10px;
   cursor: pointer;
   display: inline-flex;
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   gap: 8px;
@@ -245,3 +244,4 @@ const journey = [
   background: #ecfdf5;
 }
 </style>
+

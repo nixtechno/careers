@@ -104,7 +104,7 @@
       </div>
 
       <div class="p-6 sm:p-8">
-        <div class="mb-6 grid grid-cols-2 rounded-lg bg-slate-100 p-1">
+        <div class="mb-6 grid grid-cols-3 rounded-lg bg-slate-100 p-1">
           <button
             v-for="tab in loginTabs"
             :key="tab.id"
@@ -144,6 +144,9 @@
           <button class="mt-2 rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" type="button" @click="goToPortal">
             {{ activeLogin.buttonLabel }}
           </button>
+          <button v-if="activeLoginTab === 'admin'" class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="goTo('/schools/signup')">
+            Register a School
+          </button>
         </form>
       </div>
     </section>
@@ -164,30 +167,39 @@ const openDropdown = ref('')
 const currentPath = ref(currentRoutePath())
 const navItems = [
   { label: 'Home', path: '/' },
-  { label: 'Career Opportunities', path: '/opportunities' },
+  { label: 'Marketplace', path: '/opportunities' },
   { label: 'Resources', path: '/resources' },
   { label: 'Events', path: '/events' },
   { label: 'Donations', path: '/donations/online', children: [{ label: 'Donate Online', path: '/donations/online' }, { label: 'Bank Details', path: '/donations/bank-details' }] },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Documentation', path: '/docs' },
 ]
 const loginTabs = [
   {
     id: 'student',
     label: 'Student Login',
-    heading: 'Student Connect',
-    copy: 'Access career opportunities, guidance sessions, resources, and your career profile.',
+    heading: 'Career Path Workspace',
+    copy: 'Access AI career recommendations, skill-gap guidance, recommended opportunities, resources, and your student profile.',
     identifierLabel: 'Matric Number or Email',
     identifierPlaceholder: 'RUN/2024/0001 or student@run.edu.ng',
     buttonLabel: 'Login as Student',
   },
   {
     id: 'admin',
-    label: 'Admin Login',
-    heading: 'Admin Portal',
-    copy: 'Manage career opportunities, events, resources, student sessions, and centre updates.',
+    label: 'School Admin',
+    heading: 'School Admin Portal',
+    copy: 'Manage school integrations, academic records, student insights, opportunities, events, and outcome reports.',
     identifierLabel: 'Admin Email',
     identifierPlaceholder: 'admin@run.edu.ng',
     buttonLabel: 'Login as Admin',
+  },
+  {
+    id: 'employer',
+    label: 'Employer',
+    heading: 'Employer Portal',
+    copy: 'Post roles, review matched student profiles, manage applications, and plan campus recruitment.',
+    identifierLabel: 'Work Email',
+    identifierPlaceholder: 'talent@company.com',
+    buttonLabel: 'Login as Employer',
   },
 ]
 
@@ -219,16 +231,18 @@ const handleBookSession = () => {
 }
 
 const goToPortal = () => {
-  const target = activeLoginTab.value === 'admin' ? '/admin' : '/student'
+  const target = activeLoginTab.value === 'admin' ? '/admin' : activeLoginTab.value === 'employer' ? '/employer' : '/student'
   loginModalOpen.value = false
   navigateTo(target)
 }
 
 onMounted(() => {
   window.addEventListener('popstate', handleRouteChange)
+  window.addEventListener('open-login-modal', openLoginModal)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('popstate', handleRouteChange)
+  window.removeEventListener('open-login-modal', openLoginModal)
 })
 </script>

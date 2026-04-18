@@ -49,8 +49,8 @@
           </div>
 
           <div class="mt-10 flex flex-wrap gap-3">
-            <a class="rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" :href="withBase('/student')" @click.prevent="navigateTo('/student')">Apply through Student Connect</a>
-            <a class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-navy-900 transition hover:bg-slate-50" :href="withBase('/contact')" @click.prevent="navigateTo('/contact')">Ask CASEC for guidance</a>
+            <a class="rounded-md bg-navy-900 px-5 py-3 text-sm font-bold text-white transition hover:bg-navy-800" :href="withBase('/student')" @click.prevent="navigateTo('/student')">Open Career Workspace</a>
+            <button class="rounded-md border border-slate-300 px-5 py-3 text-sm font-bold text-navy-900 transition hover:bg-slate-50" type="button" @click="openSessionModal">Ask CASEC for guidance</button>
           </div>
         </div>
 
@@ -68,6 +68,7 @@ import { computed } from 'vue'
 import PublicLayout from '../../components/sample-one/PublicLayout.vue'
 import { opportunities } from '../../data/publicContent'
 import { navigateTo, withBase } from '../../utils/navigation'
+import { openSessionModal } from '../../utils/sessionModal'
 
 const props = defineProps({
   slug: { type: String, default: '' },
