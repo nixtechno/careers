@@ -154,12 +154,12 @@ html.dark .hover\:bg-slate-200:hover {
   background-color: #162b38 !important;
 }
 
-html.dark .sample-one-capabilities .about-panel,
+html.dark .public-capabilities .about-panel,
 html.dark .bg-gradient-to-br {
   background: linear-gradient(135deg, #06111a 0%, #0b1f2e 58%, #064e3b 100%) !important;
 }
 
-html.dark .sample-one-opportunities .shimmer {
+html.dark .public-opportunities .shimmer {
   background: linear-gradient(90deg, #102331 0%, #1f3442 48%, #102331 100%);
   background-size: 220% 100%;
 }

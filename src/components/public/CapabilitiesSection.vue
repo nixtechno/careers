@@ -1,5 +1,5 @@
 ﻿<template>
-  <section class="sample-one-capabilities bg-white py-24">
+  <section class="public-capabilities bg-white py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-16 grid items-end gap-12 lg:grid-cols-2">
         <div>
@@ -106,7 +106,7 @@ const journey = [
 ]</script>
 
 <style scoped>
-.sample-one-capabilities {
+.public-capabilities {
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 32px rgba(6, 42, 63, 0.06);
   --shadow-card-hover: 0 4px 6px rgba(0, 0, 0, 0.04), 0 16px 48px rgba(6, 42, 63, 0.12);
   color: #1e293b;

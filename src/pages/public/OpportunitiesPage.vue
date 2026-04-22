@@ -79,7 +79,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import EmptyPage from '../../components/portal/EmptyPage.vue'
-import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import PublicLayout from '../../components/public/PublicLayout.vue'
 import { opportunities } from '../../data/publicContent'
 import { navigateTo, withBase } from '../../utils/navigation'
 

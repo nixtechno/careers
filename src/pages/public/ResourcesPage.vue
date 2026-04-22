@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import PublicLayout from '../../components/public/PublicLayout.vue'
 import { navigateTo, withBase } from '../../utils/navigation'
 
 const resources = [

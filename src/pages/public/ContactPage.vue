@@ -37,7 +37,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import PublicLayout from '../../components/public/PublicLayout.vue'
 import InfoBanner from '../../components/shared/InfoBanner.vue'
 
 const messageSent = ref(false)

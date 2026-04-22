@@ -65,7 +65,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import PublicLayout from '../../components/public/PublicLayout.vue'
 import { opportunities } from '../../data/publicContent'
 import { navigateTo, withBase } from '../../utils/navigation'
 import { openSessionModal } from '../../utils/sessionModal'

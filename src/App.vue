@@ -1,7 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import SampleOne from './pages/SampleOne.vue'
-import SampleTwo from './pages/SampleTwo.vue'
+import PublicHomePage from './pages/PublicHomePage.vue'
 import AdminPortal from './pages/admin/AdminPortal.vue'
 import EmployerPortal from './pages/employer/EmployerPortal.vue'
 import StudentPortal from './pages/student/StudentPortal.vue'
@@ -18,8 +17,7 @@ import { currentRoutePath } from './utils/navigation'
 const path = ref(currentRoutePath())
 
 const routes = {
-  '/': SampleOne,
-  '/sample': SampleTwo,
+  '/': PublicHomePage,
   '/admin': AdminPortal,
   '/employer': EmployerPortal,
   '/student': StudentPortal,
@@ -49,7 +47,7 @@ const currentRoute = computed(() => {
   }
 
   return {
-    component: routes[path.value] ?? SampleOne,
+    component: routes[path.value] ?? PublicHomePage,
     props: {},
   }
 })

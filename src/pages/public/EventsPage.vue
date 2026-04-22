@@ -64,7 +64,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import PublicLayout from '../../components/sample-one/PublicLayout.vue'
+import PublicLayout from '../../components/public/PublicLayout.vue'
 import EventDetailsModal from '../../components/shared/EventDetailsModal.vue'
 import { events } from '../../data/publicContent'
 import { openSessionModal } from '../../utils/sessionModal'
